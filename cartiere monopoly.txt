@@ -1,0 +1,47 @@
+MARO 
+- Pacuret
+- Bularga
+
+ALBASTRU DESCHIS
+- Uzinei
+- Galata
+- Dacia
+
+ROZ
+- Baza 3
+- Mircea cel Batran
+- Alexandru cel Bun
+
+PORTOCALIU
+- Bucium
+- Elena Doamna
+- Tatarasi
+
+ROSU
+- Cantemir
+- Canta
+- Pacurari
+
+GALBEN
+- Tudor Vladimirescu
+- Nicolina
+- Targu Cucu
+
+VERDE
+- Podu Ros
+- Piata Unirii
+- Independentei
+
+ALBASTRU INCHIS
+- Copou
+- Stefan
+
+GARI
+- gara mare
+- gara nicolina
+- aeroport
+- autogara
+
+UZINE
+- antibiotice
+- tesatura ?
