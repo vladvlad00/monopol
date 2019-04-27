@@ -10,16 +10,19 @@ public class Player : MonoBehaviour
     public int id = 0; //Nr. player
     public int poz = 0; //0 e start, 10*n colturi, 5 15 25 35 gari etc.
     public GameObject pion;
+    public bool inchisoare;
 
     public Player(string n, GameObject p)
     {
         nume = n;
         pion = p;
         poz = 0;
+        money = 9999999;
         if (p != null)
         {
             id = nrPlayers++;
             Base.nrPlayers[0]++;
+            money = 1500;
         }
     }
 

@@ -191,9 +191,9 @@ public class Base : MonoBehaviour
     void InitPoz()
     {
         #region START
-        pozPioni[0, 0].x = GetComponent<creare_tabla>().xTabla - marimeTabla / 2 + hProp / 2+10f;
+        pozPioni[0, 0].x =  - marimeTabla / 2 + hProp / 2;
         pozPioni[0, 0].y = 1.75f;
-        pozPioni[0, 0].z = GetComponent<creare_tabla>().zTabla - marimeTabla / 2 + hProp / 2+10f;
+        pozPioni[0, 0].z =  - marimeTabla / 2 + hProp / 2 + 10;
 
         pozPioni[0, 1].x = pozPioni[0, 0].x + hProp / 4;
         pozPioni[0, 1].y = 1.75f; ;
@@ -247,6 +247,12 @@ public class Base : MonoBehaviour
         #endregion
         //pun de mana la astea speciale
         #region VIZITA 
+        pozPioni[10, 0] = new Vector3(-236.8f,1.75f,235.2f);
+        pozPioni[10, 1] = new Vector3(-236.8f,1.75f,217);
+        pozPioni[10, 2] = new Vector3(-236.8f,1.75f,198.3f);
+        pozPioni[10, 3] = new Vector3(-185.2f,1.75f,236.1f);
+        pozPioni[10, 4] = new Vector3(-208.7f,1.75f,236.1f);
+        pozPioni[10, 5] = new Vector3(-222.2f,1.75f,236.1f);
         #endregion
         #region SUS1
         pozPioni[11, 0] = new Vector3(-145.2f, 1.75f, 216.8f);
@@ -279,6 +285,29 @@ public class Base : MonoBehaviour
             }
         #endregion
         #region PARCARE
+        pozPioni[20, 0].x = marimeTabla / 2 - hProp / 2;
+        pozPioni[20, 0].y = 1.75f;
+        pozPioni[20, 0].z = marimeTabla / 2 - hProp / 2 - 10f;
+
+        pozPioni[20, 1].x = pozPioni[20, 0].x - hProp / 4;
+        pozPioni[20, 1].y = 1.75f; ;
+        pozPioni[20, 1].z = pozPioni[20, 0].z;
+
+        pozPioni[20, 2].x = pozPioni[20, 0].x + hProp / 4;
+        pozPioni[20, 2].y = 1.75f; ;
+        pozPioni[20, 2].z = pozPioni[20, 0].z;
+
+        pozPioni[20, 3].x = pozPioni[20, 0].x;
+        pozPioni[20, 3].y = 1.75f; ;
+        pozPioni[20, 3].z = pozPioni[20, 0].z + hProp / 4;
+
+        pozPioni[20, 4].x = pozPioni[20, 3].x - hProp / 4;
+        pozPioni[20, 4].y = 1.75f; ;
+        pozPioni[20, 4].z = pozPioni[20, 3].z;
+
+        pozPioni[20, 5].x = pozPioni[20, 3].x + hProp / 4;
+        pozPioni[20, 5].y = 1.75f; ;
+        pozPioni[20, 5].z = pozPioni[20, 3].z;
         #endregion
         #region DREAPTA1
         pozPioni[21, 0] = new Vector3(216.7f, 1.75f, 147.6f);
@@ -312,6 +341,9 @@ public class Base : MonoBehaviour
             }
         #endregion
         #region MERGI INCHISOARE
+        pozPioni[30, 0].x = marimeTabla / 2 - hProp / 2 - 10f;
+        pozPioni[30, 0].y = 1.75f;
+        pozPioni[30, 0].z = -marimeTabla / 2 + hProp / 2;
         #endregion
         #region JOS1
         pozPioni[31, 0] = new Vector3(146.1f, 1.75f, -216.8f);
@@ -350,24 +382,43 @@ public class Base : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && AruncaZar.vitezaZar == Vector3.zero)
-            StartCoroutine(tura());
+        if (Input.GetKeyDown(KeyCode.Space) && AruncaZar1.vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero)
+        {
+            if (players[laRand].inchisoare)
+                StartCoroutine(turaInchisoare());
+            else
+                StartCoroutine(tura());
+        }
     }
 
     IEnumerator tura()
     {
+        int nrduble = 0, pre = 0; ;
         if (seJoaca)
             yield break;
 
         seJoaca = true;
 
         //mutare
-        while (AfisareZar.nrZar == 0 || AruncaZar.vitezaZar != Vector3.zero)
+        while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
             yield return new WaitForSeconds(0.1f);
+        if (AfisareZar.nrZar1 == AfisareZar.nrZar2)
+            nrduble++;
+        if (nrduble == 3)
+            yield return StartCoroutine(inchisoare(players[laRand]));
         int aux = players[laRand].poz;
-        for (int i=0;i<AfisareZar.nrZar;i++)
-        {//de vazut rotatia
+        for (int i=0;i<AfisareZar.nrZar && !players[laRand].inchisoare;i++)
+        {
             nrPlayers[aux]--;
+            if ((aux + 1) % 10 == 0 && aux + 1 != 10)
+                players[laRand].pion.transform.rotation = Quaternion.Euler(-90, (aux + 1) % 40 / 10 * 90, 0);
+            else if (aux + 1 == 10)
+            {
+                if (nrPlayers[10] >= 3)
+                    players[laRand].pion.transform.rotation = Quaternion.Euler(-90, 90, 0);
+            }
+            else if (aux + 1 == 11)
+                players[laRand].pion.transform.rotation = Quaternion.Euler(-90, 90, 0);
             yield return StartCoroutine(misca(players[laRand].pion,players[laRand].pion.transform.position, pozPioni[(aux + 1) % 40, nrPlayers[(aux + 1) % 40]]));
             nrPlayers[(aux + 1) % 40]++;
             aux = (aux + 1) % 40;
@@ -379,7 +430,9 @@ public class Base : MonoBehaviour
         if (aux == 0 || aux == 10 || aux == 20) //nimic
             aux = aux;
         else if (aux == 30) //inchisoare
-            aux = aux; //cine stie cand o fac
+        {
+            yield return StartCoroutine(inchisoare(players[laRand]));
+        }
         else if (aux % 10 == 5)
         {
             if (gari[aux/10].owner == banca)
@@ -397,7 +450,19 @@ public class Base : MonoBehaviour
         }
         else if (aux == 12 || aux == 18)
         {
-            //utilitati, mai trebuie dat o data cu zarul
+            if (util[aux/13].owner == banca)
+            {
+                //pot sa cumpar
+            }
+            else if (util[aux/13].owner != players[laRand])
+            {
+                while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
+                    yield return new WaitForSeconds(0.1f);
+                if (util[0].owner == util[1].owner)
+                    players[laRand].plata(util[aux / 13].owner, AfisareZar.nrZar * 10);
+                else
+                    players[laRand].plata(util[aux / 13].owner, AfisareZar.nrZar * 4);
+            }
         }
         else
         {
@@ -409,8 +474,15 @@ public class Base : MonoBehaviour
                 players[laRand].plata(props[aux].owner, props[aux].chirie[props[aux].numarCase]);
         }
         //trade/end turn
-        laRand = (laRand + 1) % Player.nrPlayers;
+        if (nrduble == pre)
+            laRand = (laRand + 1) % Player.nrPlayers;
+        pre = nrduble;
         seJoaca = false;
+    }
+
+    IEnumerator turaInchisoare()
+    {
+        yield return new WaitForSeconds(0.01f);
     }
 
     public static IEnumerator misca(GameObject pion, Vector3 poz1, Vector3 poz2)
@@ -418,7 +490,7 @@ public class Base : MonoBehaviour
         if (seMisca)
             yield break;
 
-        float x, z, f, r, initx = pion.transform.position.x, inity = 1.75f, initz = pion.transform.position.z;
+        float x, z, f, r, pas, initx = pion.transform.position.x, inity = 1.75f, initz = pion.transform.position.z;
         Vector3 newPos = new Vector3();
 
         seMisca = true;
@@ -429,7 +501,8 @@ public class Base : MonoBehaviour
             if (poz1.z < poz2.z)
             {
                 r = (poz2.z - poz1.z) / 2;
-                for (z = poz1.z; z <= poz2.z; z += 1f)
+                pas = r / 20f;
+                for (z = poz1.z; z <= poz2.z; z += pas)
                 {
                     yield return new WaitForSeconds(0.01f);
                     newPos.x = poz1.x;
@@ -444,7 +517,8 @@ public class Base : MonoBehaviour
             else
             {
                 r = (poz1.z - poz2.z) / 2;
-                for (z = poz1.z; z >= poz2.z; z -= 1f)
+                pas = r / 20f;
+                for (z = poz1.z; z >= poz2.z; z -= pas)
                 {
                     yield return new WaitForSeconds(0.01f);
                     newPos.x = poz1.x;
@@ -463,7 +537,8 @@ public class Base : MonoBehaviour
             if (poz1.x < poz2.x)
             {
                 r = (poz2.x - poz1.x) / 2;
-                for (x = poz1.x; x <= poz2.x; x += 1f)
+                pas = r / 20f;
+                for (x = poz1.x; x <= poz2.x; x += pas)
                 {
                     yield return new WaitForSeconds(0.01f);
                     newPos.x = x;
@@ -478,7 +553,8 @@ public class Base : MonoBehaviour
             else
             {
                 r = (poz1.x - poz2.x) / 2;
-                for (x = poz1.x; x >= poz2.x; x -= 1f)
+                pas = r / 20f;
+                for (x = poz1.x; x >= poz2.x; x -= pas)
                 {
                     yield return new WaitForSeconds(0.01f);
                     newPos.x = x;
@@ -504,7 +580,8 @@ public class Base : MonoBehaviour
             float xcentru = (poz1.x + poz2.x) / 2, zcentru = (poz1.z + poz2.z) / 2;
             if (poz1.x < poz2.x)
             {
-                for (x = poz1.x; x <= poz2.x; x += 0.5f)
+                pas = (poz2.x-poz1.x)/ 40f;
+                for (x = poz1.x; x <= poz2.x; x += pas)
                 {
                     newPos.x = x;
                     z = newPos.z = m * x + n;
@@ -518,7 +595,8 @@ public class Base : MonoBehaviour
             }
             else
             {
-                for (x = poz1.x; x >= poz2.x; x -= 0.5f)
+                pas = (poz1.x - poz2.x) / 40f;
+                for (x = poz1.x; x >= poz2.x; x -= pas)
                 {
                     newPos.x = x;
                     z = newPos.z = m * x + n;
@@ -534,5 +612,14 @@ public class Base : MonoBehaviour
         pion.transform.position = poz2;
         pion.GetComponent<Rigidbody>().useGravity = true;
         seMisca = false;
+    }
+
+    public IEnumerator inchisoare(Player p)
+    {
+        p.inchisoare = true;
+        nrPlayers[p.poz]--;
+        yield return StartCoroutine(misca(p.pion, p.pion.transform.position, pozPioni[41, nrPlayers[41]]));
+        nrPlayers[41]++;
+        players[laRand].poz = 41;
     }
 }

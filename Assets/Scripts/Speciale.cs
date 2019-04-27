@@ -154,6 +154,7 @@ public class Speciale : MonoBehaviour
     {
         Base.nrPlayers[p.poz]--;
         StartCoroutine(Base.misca(p.pion,p.pion.transform.position, Base.pozPioni[i, Base.nrPlayers[i]]));
+        p.pion.transform.rotation = Quaternion.Euler(-90, 90 * i / 10, 0);
         Base.nrPlayers[i]++;
         p.poz = i;
     }
