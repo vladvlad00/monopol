@@ -52,7 +52,9 @@ public class AruncaZar2 : MonoBehaviour
         transform.position = spawnRandom();
         //transform.position = new Vector3(0,2,0);
         transform.rotation = rotRandom();
-        rb.AddForce(new Vector3(200f, 0f, 100f));
-        rb.AddTorque(dirX, dirY, dirZ);
+        //rb.AddForce(new Vector3(200f, 0f, 100f));
+        //rb.AddTorque(dirX, dirY, dirZ);
+        rb.AddForce(Random.onUnitSphere * 10f, ForceMode.Impulse);
+        rb.AddTorque(Random.onUnitSphere * 10f, ForceMode.Impulse);
     }
 }

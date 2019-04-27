@@ -101,59 +101,59 @@ public class Base : MonoBehaviour
         Proprietate nein = new Proprietate("nu", 0, 0, 0, 0, null);//adaug null pe pozitiile unde nu am proprietati
         #region MARO
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro1"], preturi[0], 30, 50, 0, "maro"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro2"], preturi[0], 30, 50, 0, "maro"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro2"], preturi[1], 30, 50, 1, "maro"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro1"], preturi[1], 30, 50, 1, "maro"));
         #endregion
         props.Add(nein);
         props.Add(nein);
         #region BLEU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu1"], preturi[2], 50, 50, 2, "bleu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu3"], preturi[2], 50, 50, 2, "bleu"));
         props.Add(nein);
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu2"], preturi[3], 50, 50, 3, "bleu"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu3"], preturi[4], 60, 50, 4, "bleu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu1"], preturi[4], 60, 50, 4, "bleu"));
         #endregion
         props.Add(nein);
         #region ROZ
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz1"], preturi[5], 70, 100, 5, "roz"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz3"], preturi[5], 70, 100, 5, "roz"));
         props.Add(nein);
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz2"], preturi[6], 70, 100, 6, "roz"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz3"], preturi[7], 80, 100, 7, "roz"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz1"], preturi[7], 80, 100, 7, "roz"));
         #endregion
         props.Add(nein);
         #region PORTOCALIU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu1"], preturi[8], 90, 100, 8, "portocaliu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu3"], preturi[8], 90, 100, 8, "portocaliu"));
         props.Add(nein);
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu2"], preturi[9], 90, 100, 9, "portocaliu"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu3"], preturi[10], 100, 100, 10, "portocaliu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu1"], preturi[10], 100, 100, 10, "portocaliu"));
         #endregion
         props.Add(nein);
         #region ROSU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu1"], preturi[11], 110, 150, 11, "rosu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu3"], preturi[11], 110, 150, 11, "rosu"));
         props.Add(nein);
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu2"], preturi[12], 110, 150, 12, "rosu"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu3"], preturi[13], 120, 150, 13, "rosu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu1"], preturi[13], 120, 150, 13, "rosu"));
         #endregion
         props.Add(nein);
         #region GALBEN
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben1"], preturi[14], 130, 150, 14, "galben"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben3"], preturi[14], 130, 150, 14, "galben"));
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben2"], preturi[15], 130, 150, 15, "galben"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben3"], preturi[16], 140, 150, 16, "galben"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben1"], preturi[16], 140, 150, 16, "galben"));
         #endregion
         props.Add(nein);
         #region VERDE
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde1"], preturi[17], 150, 200, 17, "verde"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde3"], preturi[17], 150, 200, 17, "verde"));
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde2"], preturi[18], 150, 200, 18, "verde"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde3"], preturi[19], 160, 200, 19, "verde"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde1"], preturi[19], 160, 200, 19, "verde"));
         #endregion
         props.Add(nein);
         props.Add(nein);
         #region ALBASTRU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru1"], preturi[20], 175, 200, 20, "albastru"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru2"], preturi[20], 175, 200, 20, "albastru"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru2"], preturi[21], 200, 200, 21, "albastru"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru1"], preturi[21], 200, 200, 21, "albastru"));
         #endregion
         int k = 0;
         for (int i = 0; i < 22;)
@@ -618,8 +618,8 @@ public class Base : MonoBehaviour
     {
         p.inchisoare = true;
         nrPlayers[p.poz]--;
-        yield return StartCoroutine(misca(p.pion, p.pion.transform.position, pozPioni[41, nrPlayers[41]]));
-        nrPlayers[41]++;
-        players[laRand].poz = 41;
+        yield return StartCoroutine(misca(p.pion, p.pion.transform.position, pozPioni[40, nrPlayers[40]]));
+        nrPlayers[40]++;
+        players[laRand].poz = 40;
     }
 }

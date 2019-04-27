@@ -4,10 +4,41 @@ using UnityEngine;
 
 public class Speciale : MonoBehaviour
 {
-    public IEnumerator sansa(Player p, int nr)
+    List<int> listaSansa = new List<int>();
+    List<int> listaCufar = new List<int>();
+    int pozSansa = 0, pozCufar = 0;
+    Random rng = new Random();
+
+    void Start()
+    {
+        for (int i = 0; i < 16; i++)
+            listaSansa.Add(i);
+        for (int i = 0; i < 15; i++)
+            listaCufar.Add(i);
+        amesteca(listaSansa);
+        amesteca(listaCufar);
+    }
+
+    void amesteca(List<int> l)
+    {
+        int n = l.Count;
+        
+        for (int i=n-1;i>=0;i--)
+        {
+            int k = Random.Range(0, i);
+            int aux = l[i];
+            l[i] = l[k];
+            l[k] = aux;
+        }
+    }
+
+    public IEnumerator sansa(Player p)
     {
         int i;
+        int nr;
 
+        nr = listaSansa[pozSansa];
+        pozSansa = (pozSansa + 1) % 16;
         yield return new WaitForSeconds(0.01f);
         switch (nr)
         {
@@ -88,8 +119,12 @@ public class Speciale : MonoBehaviour
         }
     }
 
-    public IEnumerator cufar(Player p, int nr)
+    public IEnumerator cufar(Player p)
     {
+        int nr;
+
+        nr = listaCufar[pozCufar];
+        pozCufar = (pozCufar + 1) % 16;
         yield return new WaitForSeconds(0.01f);
         switch (nr)
         {
