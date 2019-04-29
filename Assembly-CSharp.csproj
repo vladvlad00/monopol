@@ -75,8 +75,11 @@
     <Compile Include="Assets\Scripts\Proprietate.cs" />
     <Compile Include="Assets\Scripts\Proprietate2.cs" />
     <Compile Include="Assets\Scripts\rotate.cs" />
+    <Compile Include="Assets\Scripts\setPreviewProp.cs" />
     <Compile Include="Assets\Scripts\Speciale.cs" />
     <Compile Include="Assets\Scripts\StartUI.cs" />
+    <Compile Include="Assets\Scripts\UIbutonclic.cs" />
+    <Compile Include="Assets\Scripts\UImagic.cs" />
     <None Include="Assets\Shadere\pls.shader" />
     <None Include="Assets\Shadere\Gigel.shader" />
     <None Include="Assets\Shadere\pls2.shader" />

@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,6 +31,7 @@ public class Base : MonoBehaviour
     public static int[] nrPlayers = new int[40];
     public static int laRand = 0;
     static bool seMisca = false;
+    int nrduble = 0, pre = 0;
 
     public static int[] chirii =
     {
@@ -75,7 +76,9 @@ public class Base : MonoBehaviour
     void Start()
     {
         InitProps();
-        InitPoz();/*
+        InitPoz();
+        InitBanca();
+        /*
         test = Instantiate(modelDegetar, new Vector3(-220f, 3f, -220f), Quaternion.AngleAxis(-90f, new Vector3(1, 0, 0))) as GameObject;
         test.AddComponent<Rigidbody>();
         test.AddComponent<BoxCollider>();
@@ -90,6 +93,14 @@ public class Base : MonoBehaviour
         banca.money = 999999;
         banca.nume = "Banca";
         foreach (Proprietate p in props)
+        {
+            p.SetOwner(banca);
+        }
+        foreach (Proprietate2 p in gari)
+        {
+            p.SetOwner(banca);
+        }
+        foreach (Proprietate2 p in util)
         {
             p.SetOwner(banca);
         }
@@ -393,7 +404,6 @@ public class Base : MonoBehaviour
 
     IEnumerator tura()
     {
-        int nrduble = 0, pre = 0; ;
         if (seJoaca)
             yield break;
 
@@ -402,6 +412,7 @@ public class Base : MonoBehaviour
         //mutare
         while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
             yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         if (AfisareZar.nrZar1 == AfisareZar.nrZar2)
             nrduble++;
         if (nrduble == 3)
@@ -475,7 +486,10 @@ public class Base : MonoBehaviour
         }
         //trade/end turn
         if (nrduble == pre)
+        {
             laRand = (laRand + 1) % Player.nrPlayers;
+            nrduble = pre = 0;
+        }
         pre = nrduble;
         seJoaca = false;
     }

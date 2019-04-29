@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public static int nrPlayers=0;
     public int money;
-    public string nume;
+    public string nume = "player";
     public int id = 0; //Nr. player
     public int poz = 0; //0 e start, 10*n colturi, 5 15 25 35 gari etc.
     public GameObject pion;

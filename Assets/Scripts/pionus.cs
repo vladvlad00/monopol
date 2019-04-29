@@ -14,7 +14,7 @@ public class pionus : MonoBehaviour
     GameObject dis;
     public static int i = 0;
     static float x = 905f;
-    int k = 0;
+    public static int k = 0;
     int[] uz = new int[6];
     void Start()
     {
