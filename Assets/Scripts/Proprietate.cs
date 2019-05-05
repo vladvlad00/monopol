@@ -21,6 +21,9 @@ public class Proprietate : MonoBehaviour
     public bool hotel = false;
     public string SID = "neh";
     public bool ownedByBank = true;
+    public GameObject[] casute = new GameObject[4];
+    public static GameObject modelCasa;
+    public static GameObject modelHotel;
 
     //Initializare
     public Proprietate(string n, int p, int i, int cc, int cod, string cat, string s)
@@ -44,6 +47,18 @@ public class Proprietate : MonoBehaviour
                 if (numarCase < 5)
                 {
                     owner.plata(Base.banca, costCasa);
+                    if (numarCase < 4)
+                    {
+                        casute[numarCase] = Instantiate(modelCasa, Base.pozCase[id, numarCase], Quaternion.Euler(-90, (id + 7) / 6 * 90, 0)) as GameObject;
+                        casute[numarCase].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < 4; i++)
+                            Destroy(casute[i]);
+                        casute[0] = Instantiate(modelHotel, Base.pozCase[id, 1], Quaternion.Euler(-90, (id + 7) / 6 * 90, 0)) as GameObject;
+                        casute[0].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    }
                     numarCase++;
                     Updateprop();
                     setPreviewProp.crtID = SID;
@@ -84,6 +99,17 @@ public class Proprietate : MonoBehaviour
         if (numarCase > 0)
         {
             Base.banca.plata(owner, costCasa / 2);
+            if (numarCase == 5)
+            {
+                Destroy(casute[0]);
+                for (int i = 0; i < 4; i++)
+                {
+                    casute[i] = Instantiate(modelCasa, Base.pozCase[id, i], Quaternion.Euler(-90, (id + 7) / 6 * 90, 0)) as GameObject;
+                    casute[i].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                }
+                }
+            else
+                Destroy(casute[numarCase - 1]);
             numarCase--;
             Updateprop();
             setPreviewProp.crtID = SID;

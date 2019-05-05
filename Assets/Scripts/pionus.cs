@@ -11,6 +11,7 @@ public class pionus : MonoBehaviour
     public Text t; // text minim 2 playeri
     public Button s; // buton selectat pion
     public Text p; // text deja selectat
+    public InputField nume; //numele scris
     GameObject dis;
     public static int i = 0;
     static float x = 905f;
@@ -28,7 +29,13 @@ public class pionus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        bool ok = true;
+        foreach (Player p in Base.players)
+            if (p.nume == nume.text)
+                ok = false;
+        if (nume.text == "")
+            ok = false;
+        s.interactable = ok;
     }
     //nu stiu sa folosesc statice
     void DrawText(Vector3 poz, string textul, int size, Color cl, float rotX, float rotY)

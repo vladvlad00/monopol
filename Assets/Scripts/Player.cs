@@ -81,14 +81,76 @@ public class Player : MonoBehaviour
         Destroy(pion);
     }
 
-    public void trade(Player p, int baniDati, int baniPrimiti, Proprietate[] propDate, Proprietate[] propPrimite)
+    public void trade(Player p, int baniDati, int baniPrimiti, Proprietate[] propDate, Proprietate[] propPrimite, Proprietate2[] gariDate, Proprietate2[] gariPrimite, Proprietate2[] utilDate, Proprietate2[] utilPrimite)
     {
         plata(p, baniDati);
         p.plata(this, baniPrimiti);
         foreach (Proprietate i in propDate)
-            i.SetOwner(p);
+        {
+            if (i.id == -1)
+                continue;
+            foreach (Proprietate j in Base.props)
+                if (i.id == j.id)
+                {
+                    i.SetOwner(p);
+                    j.SetOwner(p);
+                }
+        }
         foreach (Proprietate i in propPrimite)
-            i.SetOwner(this);
+        {
+            if (i.id == -1)
+                continue;
+            foreach (Proprietate j in Base.props)
+                if (i.id == j.id)
+                {
+                    i.SetOwner(this);
+                    j.SetOwner(this);
+                }
+        }
+        foreach (Proprietate2 i in gariDate)
+        {
+            if (i.id == -1)
+                continue;
+            foreach (Proprietate2 j in Base.gari)
+                if (i.id == j.id)
+                {
+                    i.SetOwner(p);
+                    j.SetOwner(p);
+                }
+        }
+        foreach (Proprietate2 i in gariPrimite)
+        {
+            if (i.id == -1)
+                continue;
+            foreach (Proprietate2 j in Base.gari)
+                if (i.id == j.id)
+                {
+                    i.SetOwner(this);
+                    j.SetOwner(this);
+                }
+        }
+        foreach (Proprietate2 i in utilDate)
+        {
+            if (i.id == -1)
+                continue;
+            foreach (Proprietate2 j in Base.util)
+                if (i.id == j.id)
+                {
+                    i.SetOwner(p);
+                    j.SetOwner(p);
+                }
+        }
+        foreach (Proprietate2 i in utilPrimite)
+        {
+            if (i.id == -1)
+                continue;
+            foreach (Proprietate2 j in Base.util)
+                if (i.id == j.id)
+                {
+                    i.SetOwner(this);
+                    j.SetOwner(this);
+                }
+        }
         foreach (Proprietate i in Base.props)
             i.Updateprop2();
     }

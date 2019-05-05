@@ -60,7 +60,8 @@ public class creare_tabla : MonoBehaviour
 
     float ValAbs(float transfThis)
     {
-        if (transfThis < 0) return transfThis * -1;
+        if (transfThis < 0)
+            return -transfThis ;
         return transfThis;
     }
 

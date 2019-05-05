@@ -754,7 +754,7 @@ public class setPreviewProp : MonoBehaviour
     {
         if (crtcrtID < 100)
         {
-            if (Base.props[crtcrtID].numarCase > 0) UImagic.showERR = 9;
+            if (Base.props[crtcrtID].numarCase > 0) UImagic.showERR = 10;
             else Base.props[crtcrtID].Ipotecare();
         }
         else if (crtcrtID >= 100 && crtcrtID < 1000) Base.gari[crtcrtID % 100].Ipotecare();

@@ -80,6 +80,8 @@
     <Compile Include="Assets\Scripts\setPreviewProp.cs" />
     <Compile Include="Assets\Scripts\Speciale.cs" />
     <Compile Include="Assets\Scripts\StartUI.cs" />
+    <Compile Include="Assets\Scripts\Trade.cs" />
+    <Compile Include="Assets\Scripts\Tradebutton.cs" />
     <Compile Include="Assets\Scripts\UIbutonclic.cs" />
     <Compile Include="Assets\Scripts\UImagic.cs" />
     <Compile Include="Assets\Scripts\UIplscor.cs" />

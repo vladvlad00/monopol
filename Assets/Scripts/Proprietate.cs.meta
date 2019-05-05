@@ -3,7 +3,13 @@ guid: 6f71ef8a23c9fa84f9c693d7e5c3a93d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - owner: {instanceID: 0}
+  - lastOwn: {instanceID: 0}
+  - modelCasa: {fileID: -927199367670048503, guid: 020d420f4f59fe142a33cf7f5d5046bc,
+      type: 3}
+  - modelHotel: {fileID: -927199367670048503, guid: 92cf94ac5df88d944a4bc75c678c17bb,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

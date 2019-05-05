@@ -28,6 +28,7 @@ public class Base : MonoBehaviour
     public GameObject[] modele = new GameObject[6];
     public static bool seJoaca = false;
     public static Vector3[,] pozPioni = new Vector3[41,6]; //poz 41 e pentru cand esti la inchisoare
+    public static Vector3[,] pozCase = new Vector3[41, 5];
     public static int[] nrPlayers = new int[41];
     public static int laRand = 0;
     static bool seMisca = false;
@@ -50,6 +51,8 @@ public class Base : MonoBehaviour
     bool dinInchisoare;
     public GameObject buton50;
     bool turaPuscarie = false;
+    public static Proprietate nein = new Proprietate("nu", -1, -1, -1, -1, null, null);//adaug null pe pozitiile unde nu am proprietati
+    public static Proprietate2 nein2 = new Proprietate2("nu", -1, -1, -1, null);
 
     public static int[] chirii =
     {
@@ -93,6 +96,8 @@ public class Base : MonoBehaviour
 
     void Start()
     {
+        Proprietate.modelCasa = modelCasa;
+        Proprietate.modelHotel = modelHotel;
         InitProps();
         InitPoz();
         InitBanca();
@@ -129,7 +134,7 @@ public class Base : MonoBehaviour
     //initializare proprietati
     void InitProps()
     {
-        Proprietate nein = new Proprietate("nu", 0, 0, 0, 0, null, null);//adaug null pe pozitiile unde nu am proprietati
+        
         #region MARO
         props.Add(nein);
         props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro2"], preturi[0], 30, 50, 0, "maro","maro1"));
@@ -277,6 +282,21 @@ public class Base : MonoBehaviour
                 pozPioni[i, j] = pozPioni[i - 1, j];
                 pozPioni[i, j].z += lProp;
             }
+        pozCase[0, 0] = new Vector3(-183, 1.8f, -150.1f);
+        pozCase[1, 0] = pozCase[0, 0];
+        pozCase[1, 0].z += 2 * lProp;
+        pozCase[2, 0] = pozCase[1, 0];
+        pozCase[2, 0].z += 3 * lProp;
+        pozCase[3, 0] = pozCase[2, 0];
+        pozCase[3, 0].z += 2 * lProp;
+        pozCase[4, 0] = pozCase[3, 0];
+        pozCase[4, 0].z += lProp;
+        for (int i = 0; i < 5; i++)
+            for (int j = 1; j < 4; j++)
+            {
+                pozCase[i, j] = pozCase[i, j - 1];
+                pozCase[i, j].z -= lProp / 4;
+            }
         #endregion
         //pun de mana la astea speciale
         #region VIZITA 
@@ -315,6 +335,23 @@ public class Base : MonoBehaviour
             {
                 pozPioni[i, j] = pozPioni[i - 1, j];
                 pozPioni[i, j].x += lProp;
+            }
+        pozCase[5, 0] = new Vector3(-150.2f, 1.8f, 182.9f);
+        pozCase[6, 0] = pozCase[5, 0];
+        pozCase[6, 0].x += 2 * lProp;
+        pozCase[7, 0] = pozCase[6, 0];
+        pozCase[7, 0].x += lProp;
+        pozCase[8, 0] = pozCase[7, 0];
+        pozCase[8, 0].x += 2 * lProp;
+        pozCase[9, 0] = pozCase[8, 0];
+        pozCase[9, 0].x += 2 * lProp;
+        pozCase[10, 0] = pozCase[9, 0];
+        pozCase[10, 0].x += lProp;
+        for (int i = 5; i < 11; i++)
+            for (int j = 1; j < 4; j++)
+            {
+                pozCase[i, j] = pozCase[i, j - 1];
+                pozCase[i, j].x -= lProp / 4;
             }
         #endregion
         #region PARCARE
@@ -372,6 +409,23 @@ public class Base : MonoBehaviour
                 pozPioni[i, j] = pozPioni[i - 1, j];
                 pozPioni[i, j].z -= lProp;
             }
+        pozCase[11, 0] = new Vector3(182.5f, 1.8f, 150);
+        pozCase[12, 0] = pozCase[11, 0];
+        pozCase[12, 0].z -= 2 * lProp;
+        pozCase[13, 0] = pozCase[12, 0];
+        pozCase[13, 0].z -= lProp;
+        pozCase[14, 0] = pozCase[13, 0];
+        pozCase[14, 0].z -= 2 * lProp;
+        pozCase[15, 0] = pozCase[14, 0];
+        pozCase[15, 0].z -= lProp;
+        pozCase[16, 0] = pozCase[15, 0];
+        pozCase[16, 0].z -= 2 * lProp;
+        for (int i = 11; i < 17; i++)
+            for (int j = 1; j < 4; j++)
+            {
+                pozCase[i, j] = pozCase[i, j - 1];
+                pozCase[i, j].z += lProp / 4;
+            }
         #endregion
         #region MERGI INCHISOARE
         pozPioni[30, 0].x = marimeTabla / 2 - hProp / 2 - 10f;
@@ -406,6 +460,21 @@ public class Base : MonoBehaviour
             {
                 pozPioni[i, j] = pozPioni[i - 1, j];
                 pozPioni[i, j].x -= lProp;
+            }
+        pozCase[17, 0] = new Vector3(150.4f, 1.8f, -182.2f);
+        pozCase[18, 0] = pozCase[17, 0];
+        pozCase[18, 0].x -= lProp;
+        pozCase[19, 0] = pozCase[18, 0];
+        pozCase[19, 0].x -= 2 * lProp;
+        pozCase[20, 0] = pozCase[19, 0];
+        pozCase[20, 0].x -= 3 * lProp;
+        pozCase[21, 0] = pozCase[20, 0];
+        pozCase[21, 0].x -= 2 * lProp;
+        for (int i = 17; i < 22; i++)
+            for (int j = 1; j < 4; j++)
+            {
+                pozCase[i, j] = pozCase[i, j - 1];
+                pozCase[i, j].x += lProp / 4;
             }
         #endregion
         #region INCHISOARE
@@ -451,9 +520,9 @@ public class Base : MonoBehaviour
             if (Input.GetKey(KeyCode.Escape)) UImagic.showERR = 9;
             // players[1].money = 1;
 
-            if (players[laRand].inchisoare && !turaPuscarie && !players[laRand].platit50)
-                buton50.SetActive(true);
             if (Player.nrPlayers > 0 && players[laRand].pierdut == true) gataTura();
+            if (Player.nrPlayers > 0 && players[laRand].inchisoare && !turaPuscarie && !players[laRand].platit50)
+                buton50.SetActive(true);
             else if ((AruncaZar1.aruncat && AruncaZar2.aruncat) && AruncaZar1.vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero)
             {
                 AruncaZar1.aruncat = false;
@@ -1010,7 +1079,7 @@ public class Base : MonoBehaviour
 
         seMisca = true;
         pion.GetComponent<Rigidbody>().useGravity = false;
-        if (poz1.x == poz2.x)
+        if (Mathf.Abs(poz1.x - poz2.x) < 0.01f)
         {
             float xcentru = (poz1.x + poz2.x) / 2, zcentru = (poz1.z + poz2.z) / 2;
             if (poz1.z < poz2.z)
@@ -1046,7 +1115,7 @@ public class Base : MonoBehaviour
                 }
             }
         }
-        else if (poz1.z == poz2.z)
+        else if (Mathf.Abs(poz1.z - poz2.z) < 0.01f)
         {
             float xcentru = (poz1.x + poz2.x) / 2, zcentru = (poz1.z + poz2.z) / 2;
             if (poz1.x < poz2.x)
