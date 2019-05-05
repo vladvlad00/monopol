@@ -2,25 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AruncaZar1 : MonoBehaviour {
+public class AruncaZar1 : MonoBehaviour
+{
 
 	static Rigidbody rb;
 	public static Vector3 vitezaZar;
+    public static bool aruncat = false;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		rb = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		vitezaZar = rb.velocity;
-
+	void Update ()
+    {
+        vitezaZar = rb.velocity;
+        /*
 		if (Input.GetKeyDown (KeyCode.Space) && vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero && Base.seJoaca == false)
         {
             arunca();
 		}
-	}
+        */
+    }
 
     private Vector3 spawnRandom()
     {
@@ -42,16 +47,21 @@ public class AruncaZar1 : MonoBehaviour {
 
     public void arunca()
     {
-        AfisareZar.nrZar = AfisareZar.nrZar1 = 0;
-        float dirX = Random.Range(0, 500);
-        float dirY = Random.Range(0, 500);
-        float dirZ = Random.Range(0, 500);
-        transform.position = spawnRandom();
-        //transform.position = new Vector3(0,2,0);
-        transform.rotation = rotRandom();
-        //rb.AddForce(new Vector3(200f, 0f, 100f));
-        //rb.AddTorque(dirX, dirY, dirZ);
-        rb.AddForce(Random.onUnitSphere * 10f, ForceMode.Impulse);
-        rb.AddTorque(Random.onUnitSphere * 10f, ForceMode.Impulse);
+        //vitezaZar = rb.velocity;
+        if (vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero && Base.seJoaca == false)
+        {
+            AfisareZar.nrZar = AfisareZar.nrZar1 = 0;
+            float dirX = Random.Range(0, 500);
+            float dirY = Random.Range(0, 500);
+            float dirZ = Random.Range(0, 500);
+            transform.position = spawnRandom();
+            //transform.position = new Vector3(0,2,0);
+            transform.rotation = rotRandom();
+            //rb.AddForce(new Vector3(200f, 0f, 100f));
+            //rb.AddTorque(dirX, dirY, dirZ);
+            rb.AddForce(Random.onUnitSphere * 10f, ForceMode.Impulse);
+            rb.AddTorque(Random.onUnitSphere * 10f, ForceMode.Impulse);
+            aruncat = true;
+        }
     }
 }

@@ -9,10 +9,19 @@ public class setPreviewProp : MonoBehaviour
     public GameObject g;
     public GameObject u;
     public GameObject sc;
+    public GameObject exit;
+    public GameObject buyProp;
+    public GameObject propPrev;
+    public GameObject editProp;
+    public GameObject casaplus;
+    public GameObject casaminus;
+    public GameObject ipotec;
+    public GameObject ipont;
 
     public Sprite[] sp = new Sprite[7];
 
     public static string crtID = null;
+    public static bool iesi = false;
 
     #region imported from creare_tabla.cs
 
@@ -73,6 +82,8 @@ public class setPreviewProp : MonoBehaviour
     //sc
     Text scText;
 
+    int crtcrtID;
+
     void Start()
     {
         ConvertAllColors();
@@ -124,6 +135,7 @@ public class setPreviewProp : MonoBehaviour
             #region proprietati
             if (crtID == "maro1")
             {
+                crtcrtID = 1;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -141,6 +153,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "maro2")
             {
+                crtcrtID = 3;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -158,6 +171,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "bleu1")
             {
+                crtcrtID = 6;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -175,6 +189,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "bleu2")
             {
+                crtcrtID = 8;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -192,6 +207,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "bleu3")
             {
+                crtcrtID = 9;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -209,6 +225,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "roz1")
             {
+                crtcrtID = 11;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -226,6 +243,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "roz2")
             {
+                crtcrtID = 13;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -243,6 +261,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "roz3")
             {
+                crtcrtID = 14;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -260,6 +279,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "portocaliu1")
             {
+                crtcrtID = 16;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -277,6 +297,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "portocaliu2")
             {
+                crtcrtID = 18;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -294,6 +315,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "portocaliu3")
             {
+                crtcrtID = 19;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -311,6 +333,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "rosu1")
             {
+                crtcrtID = 21;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -328,6 +351,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "rosu2")
             {
+                crtcrtID = 23;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -345,6 +369,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "rosu3")
             {
+                crtcrtID = 24;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -362,6 +387,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "galben1")
             {
+                crtcrtID = 26;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -379,6 +405,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "galben2")
             {
+                crtcrtID = 27;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -396,6 +423,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "galben3")
             {
+                crtcrtID = 29;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -413,6 +441,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "verde1")
             {
+                crtcrtID = 31;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -430,6 +459,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "verde2")
             {
+                crtcrtID = 32;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -447,6 +477,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "verde3")
             {
+                crtcrtID = 34;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -464,6 +495,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "albastru1")
             {
+                crtcrtID = 37;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -481,6 +513,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "albastru2")
             {
+                crtcrtID = 39;
                 p.SetActive(true);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -500,6 +533,7 @@ public class setPreviewProp : MonoBehaviour
             #region gari
             else if (crtID == "gara1")
             {
+                crtcrtID = 100;
                 p.SetActive(false);
                 g.SetActive(true);
                 u.SetActive(false);
@@ -514,6 +548,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "gara2")
             {
+                crtcrtID = 101;
                 p.SetActive(false);
                 g.SetActive(true);
                 u.SetActive(false);
@@ -528,6 +563,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "gara3")
             {
+                crtcrtID = 102;
                 p.SetActive(false);
                 g.SetActive(true);
                 u.SetActive(false);
@@ -542,6 +578,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "gara4")
             {
+                crtcrtID = 103;
                 p.SetActive(false);
                 g.SetActive(true);
                 u.SetActive(false);
@@ -558,6 +595,7 @@ public class setPreviewProp : MonoBehaviour
             #region utilitati
             else if (crtID == "util1")
             {
+                crtcrtID = 1000;
                 p.SetActive(false);
                 g.SetActive(false);
                 u.SetActive(true);
@@ -568,6 +606,7 @@ public class setPreviewProp : MonoBehaviour
             }
             else if (crtID == "util2")
             {
+                crtcrtID = 1001;
                 p.SetActive(false);
                 g.SetActive(false);
                 u.SetActive(true);
@@ -577,18 +616,159 @@ public class setPreviewProp : MonoBehaviour
                 uImage.sprite = sp[4];
             }
             #endregion
-            #region
+            #region sansa cufar
             else
             {
                 p.SetActive(false);
                 g.SetActive(false);
                 u.SetActive(false);
                 sc.SetActive(true);
-                //scText.text = vectorul ala[crtID];
+                scText.text = GetComponent<Base>().scTxt[int.Parse(crtID)];
             }
             #endregion
+            if(crtcrtID < 100)
+            {
+                if (Base.props[crtcrtID].numarCase != 0) pValChirie.color = Color.black;
+                if (Base.props[crtcrtID].numarCase != 1) pChirie1.color = Color.black;
+                if (Base.props[crtcrtID].numarCase != 2) pChirie2.color = Color.black;
+                if (Base.props[crtcrtID].numarCase != 3) pChirie3.color = Color.black;
+                if (Base.props[crtcrtID].numarCase != 4) pChirie4.color = Color.black;
+                if (Base.props[crtcrtID].numarCase != 5) pChirie5.color = Color.black;
+                if (Base.props[crtcrtID].numarCase == 0) pValChirie.color = Rosu;
+                else if (Base.props[crtcrtID].numarCase == 1) pChirie1.color = Rosu;
+                else if (Base.props[crtcrtID].numarCase == 2) pChirie2.color = Rosu;
+                else if (Base.props[crtcrtID].numarCase == 3) pChirie3.color = Rosu;
+                else if (Base.props[crtcrtID].numarCase == 4) pChirie4.color = Rosu;
+                else if (Base.props[crtcrtID].numarCase == 5) pChirie5.color = Rosu;
+                Base.props[crtcrtID].Updateprop();
+            }
+            if(crtcrtID >= 100 && crtcrtID < 1000)
+            {
+                if (Base.gari[crtcrtID % 100].numarGari() != 1) gChirie1.color = Color.black;
+                if (Base.gari[crtcrtID % 100].numarGari() != 2) gChirie2.color = Color.black;
+                if (Base.gari[crtcrtID % 100].numarGari() != 3) gChirie3.color = Color.black;
+                if (Base.gari[crtcrtID % 100].numarGari() != 4) gChirie4.color = Color.black;
+                if (Base.gari[crtcrtID % 100].numarGari() == 1) gChirie1.color = Rosu;
+                else if (Base.gari[crtcrtID % 100].numarGari() == 2) gChirie2.color = Rosu;
+                else if (Base.gari[crtcrtID % 100].numarGari() == 3) gChirie3.color = Rosu;
+                else if (Base.gari[crtcrtID % 100].numarGari() == 4) gChirie4.color = Rosu;
+            }
             crtID = null;
+            //ce apare in plus
+            if (Base.inBuyScreen == true)
+            {
+                exit.SetActive(false);
+                buyProp.SetActive(true);
+                propPrev.SetActive(true);
+            }
+            else
+            {
+                exit.SetActive(true);
+                buyProp.SetActive(false);
+                propPrev.SetActive(true);
+                if (crtcrtID < 100)
+                {
+                    if (Base.props[crtcrtID].owner.id == Base.players[Base.laRand].id)
+                    {
+                        editProp.SetActive(true);
+                        if (Base.props[crtcrtID].numarCase < 5) casaplus.GetComponent<Button>().interactable = true;
+                        if (Base.props[crtcrtID].numarCase > 0) casaminus.GetComponent<Button>().interactable = true;
+                        if (Base.props[crtcrtID].ipotecat == false)
+                        {
+                            ipotec.GetComponent<Button>().interactable = true;
+                            ipont.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            ipotec.GetComponent<Button>().interactable = false;
+                            ipont.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
+                else if (crtcrtID >= 100 && crtcrtID < 1000)
+                {
+                    if (Base.gari[crtcrtID % 100].owner.id == Base.players[Base.laRand].id)
+                    {
+                        editProp.SetActive(true);
+                        casaplus.GetComponent<Button>().interactable = false;
+                        casaminus.GetComponent<Button>().interactable = false;
+                        if (Base.gari[crtcrtID % 100].ipotecat == false)
+                        {
+                            ipotec.GetComponent<Button>().interactable = true;
+                            ipont.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            ipotec.GetComponent<Button>().interactable = false;
+                            ipont.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
+                else if (crtcrtID >= 1000)
+                {
+                    if (Base.util[crtcrtID % 1000].owner.id == Base.players[Base.laRand].id)
+                    {
+                        editProp.SetActive(true);
+                        casaplus.GetComponent<Button>().interactable = false;
+                        casaminus.GetComponent<Button>().interactable = false;
+                        if (Base.util[crtcrtID % 1000].ipotecat == false)
+                        {
+                            ipotec.GetComponent<Button>().interactable = true;
+                            ipont.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            ipotec.GetComponent<Button>().interactable = false;
+                            ipont.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
+                else
+                {
+                    editProp.SetActive(false);
+                }
+
+            }
+        }
+        if(iesi == true)
+        {
+            propPrev.SetActive(false);
+            buyProp.SetActive(false);
+            iesi = false;
         }
     }
+    
+    public void ConstrCasa()
+    {
+        Base.props[crtcrtID].Build();
+        if (Base.props[crtcrtID].numarCase < 5) casaplus.GetComponent<Button>().interactable = true;
+    }
 
+    public void VindeCasa()
+    {
+        Base.props[crtcrtID].Demolish();
+        if (Base.props[crtcrtID].numarCase < 1) casaminus.GetComponent<Button>().interactable = false;
+    }
+
+    public void Ipotecare()
+    {
+        if (crtcrtID < 100)
+        {
+            if (Base.props[crtcrtID].numarCase > 0) UImagic.showERR = 9;
+            else Base.props[crtcrtID].Ipotecare();
+        }
+        else if (crtcrtID >= 100 && crtcrtID < 1000) Base.gari[crtcrtID % 100].Ipotecare();
+        else if (crtcrtID >= 1000) Base.util[crtcrtID % 1000].Ipotecare();
+        ipotec.GetComponent<Button>().interactable = false;
+        ipont.GetComponent<Button>().interactable = true;
+    }
+
+    public void DeIpotecare()
+    {
+        if (crtcrtID < 100) Base.props[crtcrtID].deIpotecare();
+        else if (crtcrtID >= 100 && crtcrtID < 1000) Base.gari[crtcrtID % 100].deIpotecare();
+        else if (crtcrtID >= 1000) Base.util[crtcrtID % 1000].deIpotecare();
+        ipotec.GetComponent<Button>().interactable = true;
+        ipont.GetComponent<Button>().interactable = false;
+    }
 }

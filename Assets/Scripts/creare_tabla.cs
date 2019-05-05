@@ -45,7 +45,7 @@ public class creare_tabla : MonoBehaviour
         ConvertAllColors();
         //InitCanvas();
         InitTableNames();
-        DrawReper();
+        //DrawReper(); F for the fallen comrade, RIP
         DrawTheBlackLinesPlease();
         DrawTheRectsPlease();
         DrawTheCorners();
@@ -98,28 +98,28 @@ public class creare_tabla : MonoBehaviour
 
     void InitTableNames()
     {
-        names["albastru2"] = "Copou";
-        names["albastru1"] = "Stefan\ncel Mare";
-        names["verde3"] = "Centru";
+        names["albastru1"] = "Copou";
+        names["albastru2"] = "Stefan\ncel Mare";
+        names["verde1"] = "Centru";
         names["verde2"] = "Piata\nUnirii";
-        names["verde1"] = "Podu\nRos";
-        names["galben3"] = "Targu\nCucu";
+        names["verde3"] = "Podu\nRos";
+        names["galben1"] = "Targu\nCucu";
         names["galben2"] = "Nicolina";
-        names["galben1"] = "Tudor";
-        names["rosu3"] = "Pacurari";
+        names["galben3"] = "Tudor";
+        names["rosu1"] = "Pacurari";
         names["rosu2"] = "Canta";
-        names["rosu1"] = "Cantemir";
-        names["portocaliu3"] = "Tatarasi";
+        names["rosu3"] = "Cantemir";
+        names["portocaliu1"] = "Tatarasi";
         names["portocaliu2"] = "Elena\nDoamna";
-        names["portocaliu1"] = "Bucium";
-        names["roz3"] = "Alexandru";
+        names["portocaliu3"] = "Bucium";
+        names["roz1"] = "Alexandru";
         names["roz2"] = "Mircea";
-        names["roz1"] = "Baza 3";
-        names["bleu3"] = "Uzinei";
+        names["roz3"] = "Baza 3";
+        names["bleu1"] = "Uzinei";
         names["bleu2"] = "Bularga";
-        names["bleu1"] = "Dacia";
-        names["maro2"] = "Galata";
-        names["maro1"] = "Pacuret";
+        names["bleu3"] = "Dacia";
+        names["maro1"] = "Galata";
+        names["maro2"] = "Pacuret";
         names["util1"] = "Antibiotice";
         names["util2"] = "E-ON";
         names["gara1"] = "Gara";
@@ -361,7 +361,7 @@ public class creare_tabla : MonoBehaviour
         #endregion
 
     }
-
+    
     void DrawReper()
     {
 

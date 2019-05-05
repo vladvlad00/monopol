@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class Player : MonoBehaviour
     public int poz = 0; //0 e start, 10*n colturi, 5 15 25 35 gari etc.
     public GameObject pion;
     public bool inchisoare;
+    public bool pierdut;
+    public int dubleInchisoare;
+    public bool platit50;
+    public Text err3;
 
     public Player(string n, GameObject p)
     {
@@ -18,10 +23,12 @@ public class Player : MonoBehaviour
         pion = p;
         poz = 0;
         money = 9999999;
+        pierdut = false;
         if (p != null)
         {
             id = nrPlayers++;
             Base.nrPlayers[0]++;
+            inchisoare = false;
             money = 1500;
         }
     }
@@ -31,13 +38,49 @@ public class Player : MonoBehaviour
     {
         money -= suma;
         p.money += suma;
+        if (money < 0) Bankrupt();
+        UImagic.schimbat = true;
     }
     //Daca pierzi
     public void Bankrupt()
     {
-
+        int val = 0;
+        foreach(Proprietate p in Base.props)
+        {
+            if (p.owner.id == id) val += (p.ipoteca + p.numarCase * p.costCasa); 
+        }
+        foreach(Proprietate2 p in Base.util)
+        {
+            if (p.owner.id == id) val += p.ipoteca;
+        }
+        foreach (Proprietate2 p in Base.gari)
+        {
+            if (p.owner.id == id) val += p.ipoteca;
+        }
+        if (money + val < 0) lost();
+        else UImagic.showERR = 2;
     }
     
+    public void lost()
+    {
+        UImagic.lostplayer = Base.players[Base.laRand].nume;
+        UImagic.showERR = 3;
+        pierdut = true;
+        foreach(Proprietate p in Base.props)
+        {
+            if (p.owner.id == id) p.SetOwner(Base.banca);
+        }
+        foreach(Proprietate2 p in Base.gari)
+        {
+            if (p.owner.id == id) p.SetOwner(Base.banca);
+        }
+        foreach(Proprietate2 p in Base.util)
+        {
+            if (p.owner.id == id) p.SetOwner(Base.banca);
+        }
+        Destroy(pion);
+    }
+
     public void trade(Player p, int baniDati, int baniPrimiti, Proprietate[] propDate, Proprietate[] propPrimite)
     {
         plata(p, baniDati);
@@ -46,13 +89,31 @@ public class Player : MonoBehaviour
             i.SetOwner(p);
         foreach (Proprietate i in propPrimite)
             i.SetOwner(this);
+        foreach (Proprietate i in Base.props)
+            i.Updateprop2();
     }
 
     public void buyProp(Proprietate p)
     {
-        plata(Base.banca, p.pret);
-        p.SetOwner(this);
+        if (money - p.pret > 0)
+        {
+            plata(Base.banca, p.pret);
+            p.SetOwner(this);
+            Base.offBuyScreen();
+            p.ownedByBank = false;
+            p.Updateprop();
+        }
+        else UImagic.showERR = 1;
     }
-
-    
+    public void buyProp2(Proprietate2 p)
+    {
+        if (money - p.pret > 0)
+        {
+            plata(Base.banca, p.pret);
+            p.SetOwner(this);
+            Base.offBuyScreen();
+            p.ownedByBank = false;
+        }
+        else UImagic.showERR = 1;
+    }
 }

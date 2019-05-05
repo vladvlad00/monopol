@@ -10,6 +10,8 @@ public class Proprietate : MonoBehaviour
     public string categorie;
     public int pret;
     public int[] chirie = new int[6];
+    public int chiried;
+    public int oldchir;
     public int ipoteca; //ca sa cumperi inapoi ipoteca*1.1
     public int costCasa;
     public int numarCase = 0;
@@ -17,9 +19,11 @@ public class Proprietate : MonoBehaviour
     public bool ipotecat = false;
     public bool isInTrade = false;
     public bool hotel = false;
+    public string SID = "neh";
+    public bool ownedByBank = true;
 
     //Initializare
-    public Proprietate(string n, int p, int i, int cc, int cod, string cat)
+    public Proprietate(string n, int p, int i, int cc, int cod, string cat, string s)
     {
         nume = n;
         pret = p;
@@ -27,16 +31,64 @@ public class Proprietate : MonoBehaviour
         costCasa = cc;
         id = cod;
         categorie = cat;
+        SID = s;
     }
     //Cumpara o casa
-    void Build()
+    public void Build()
     {
-        
+        if (owner.money - costCasa < 0) UImagic.showERR = 4; //bani
+        else
+        {
+            if (CanBuild())
+            {
+                if (numarCase < 5)
+                {
+                    owner.plata(Base.banca, costCasa);
+                    numarCase++;
+                    Updateprop();
+                    setPreviewProp.crtID = SID;
+                }
+                else UImagic.showERR = 7; // prea multe
+            }
+            else UImagic.showERR = 5; //numar inegal
+        }
+    }
+
+    public void Updateprop()
+    {
+        foreach(Proprietate p in Base.props)
+        {
+            if (p.categorie == categorie) p.Updateprop2();
+        }
+    }
+
+    public void Updateprop2()
+    {
+        bool ok = true;
+        foreach(Proprietate p in Base.props)
+        {
+            if(p.categorie == categorie)
+            {
+                if (p.owner.id != owner.id) ok = false;
+                if (p.numarCase > 0) ok = false;
+                if (p.owner.id == Base.banca.id) ok = false;
+                if (p.ipotecat == true) ok = false;
+            }
+        }
+        if (ok) chirie[0] = chiried;
+        else chirie[0] = oldchir;
     }
     //Vinde o casa
-    void Demolish()
+    public void Demolish()
     {
-        
+        if (numarCase > 0)
+        {
+            Base.banca.plata(owner, costCasa / 2);
+            numarCase--;
+            Updateprop();
+            setPreviewProp.crtID = SID;
+        }
+        else UImagic.showERR = 6; //macar 1 casa
     }
     //Verifica daca poti construi casa
     bool CanBuild()
@@ -46,8 +98,8 @@ public class Proprietate : MonoBehaviour
         {
             if (p.categorie == categorie)
             {
-                if (p.owner != owner) ok = false;
-                else if (p.numarCase + 1 > numarCase) ok = false;
+                if (p.owner.id != owner.id) ok = false;
+                if (p.numarCase < numarCase) ok = false;
             }
         }
         return ok;
@@ -56,13 +108,26 @@ public class Proprietate : MonoBehaviour
     public void SetOwner(Player p)
     {
         owner = p;
+        ownedByBank = false;
+        if (p.id == 100) ownedByBank = true;
     }
     //Ipotechezi proprietatea
-    void Ipotecare()
+    public void Ipotecare()
     {
-        Base.banca.plata(owner,pret/2);
-        ipotecat = true;
-        SetOwner(Base.banca);
+        if (!ipotecat)
+        {
+            Base.banca.plata(owner, pret / 2);
+            ipotecat = true;
+        }
+    }
+    // scoti ipoteca
+    public void deIpotecare()
+    {
+        if (ipotecat)
+        {
+            owner.plata(Base.banca, ((pret / 2) * 11) / 10);
+            ipotecat = false;
+        }
     }
 
 }

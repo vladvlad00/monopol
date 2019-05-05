@@ -7,6 +7,7 @@ public class AruncaZar2 : MonoBehaviour
 
     static Rigidbody rb;
     public static Vector3 vitezaZar;
+    public static bool aruncat = false;
 
     // Use this for initialization
     void Start()
@@ -18,11 +19,12 @@ public class AruncaZar2 : MonoBehaviour
     void Update()
     {
         vitezaZar = rb.velocity;
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space) && vitezaZar == Vector3.zero && AruncaZar1.vitezaZar == Vector3.zero && Base.seJoaca == false)
         {
             arunca();
         }
+        */
     }
 
     private Vector3 spawnRandom()
@@ -45,16 +47,21 @@ public class AruncaZar2 : MonoBehaviour
 
     public void arunca()
     {
-        AfisareZar.nrZar2 = 0;
-        float dirX = Random.Range(0, 500);
-        float dirY = Random.Range(0, 500);
-        float dirZ = Random.Range(0, 500);
-        transform.position = spawnRandom();
-        //transform.position = new Vector3(0,2,0);
-        transform.rotation = rotRandom();
-        //rb.AddForce(new Vector3(200f, 0f, 100f));
-        //rb.AddTorque(dirX, dirY, dirZ);
-        rb.AddForce(Random.onUnitSphere * 10f, ForceMode.Impulse);
-        rb.AddTorque(Random.onUnitSphere * 10f, ForceMode.Impulse);
+        //vitezaZar = rb.velocity;
+        if (vitezaZar == Vector3.zero && AruncaZar1.vitezaZar == Vector3.zero && Base.seJoaca == false)
+        {
+            AfisareZar.nrZar2 = 0;
+            float dirX = Random.Range(0, 500);
+            float dirY = Random.Range(0, 500);
+            float dirZ = Random.Range(0, 500);
+            transform.position = spawnRandom();
+            //transform.position = new Vector3(0,2,0);
+            transform.rotation = rotRandom();
+            //rb.AddForce(new Vector3(200f, 0f, 100f));
+            //rb.AddTorque(dirX, dirY, dirZ);
+            rb.AddForce(Random.onUnitSphere * 10f, ForceMode.Impulse);
+            rb.AddTorque(Random.onUnitSphere * 10f, ForceMode.Impulse);
+            aruncat = true;
+        }
     }
 }

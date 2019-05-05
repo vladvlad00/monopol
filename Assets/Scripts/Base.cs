@@ -28,10 +28,28 @@ public class Base : MonoBehaviour
     public GameObject[] modele = new GameObject[6];
     public static bool seJoaca = false;
     public static Vector3[,] pozPioni = new Vector3[41,6]; //poz 41 e pentru cand esti la inchisoare
-    public static int[] nrPlayers = new int[40];
+    public static int[] nrPlayers = new int[41];
     public static int laRand = 0;
     static bool seMisca = false;
+    public static bool inBuyScreen = false;
     int nrduble = 0, pre = 0;
+    public Button terminaTura;
+    public Button daCuZaru;
+    public static int crtP;
+    public static string crtTip;
+    bool sigurok = false;
+    bool endgame = false;
+    public GameObject fireworks;
+    public GameObject ExitGame;
+    List<int> listaSansa = new List<int>();
+    List<int> listaCufar = new List<int>();
+    int pozSansa = 0, pozCufar = 0;
+    Random rng = new Random();
+    public List<string> scTxt = new List<string>();
+    public GameObject previewProp;
+    bool dinInchisoare;
+    public GameObject buton50;
+    bool turaPuscarie = false;
 
     public static int[] chirii =
     {
@@ -78,6 +96,7 @@ public class Base : MonoBehaviour
         InitProps();
         InitPoz();
         InitBanca();
+        InitSanse();
         /*
         test = Instantiate(modelDegetar, new Vector3(-220f, 3f, -220f), Quaternion.AngleAxis(-90f, new Vector3(1, 0, 0))) as GameObject;
         test.AddComponent<Rigidbody>();
@@ -92,6 +111,7 @@ public class Base : MonoBehaviour
     {
         banca.money = 999999;
         banca.nume = "Banca";
+        banca.id = 100;
         foreach (Proprietate p in props)
         {
             p.SetOwner(banca);
@@ -109,62 +129,62 @@ public class Base : MonoBehaviour
     //initializare proprietati
     void InitProps()
     {
-        Proprietate nein = new Proprietate("nu", 0, 0, 0, 0, null);//adaug null pe pozitiile unde nu am proprietati
+        Proprietate nein = new Proprietate("nu", 0, 0, 0, 0, null, null);//adaug null pe pozitiile unde nu am proprietati
         #region MARO
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro2"], preturi[0], 30, 50, 0, "maro"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro2"], preturi[0], 30, 50, 0, "maro","maro1"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro1"], preturi[1], 30, 50, 1, "maro"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["maro1"], preturi[1], 30, 50, 1, "maro", "maro2"));
         #endregion
         props.Add(nein);
         props.Add(nein);
         #region BLEU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu3"], preturi[2], 50, 50, 2, "bleu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu3"], preturi[2], 50, 50, 2, "bleu", "bleu1"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu2"], preturi[3], 50, 50, 3, "bleu"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu1"], preturi[4], 60, 50, 4, "bleu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu2"], preturi[3], 50, 50, 3, "bleu", "bleu2"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["bleu1"], preturi[4], 60, 50, 4, "bleu", "bleu3"));
         #endregion
         props.Add(nein);
         #region ROZ
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz3"], preturi[5], 70, 100, 5, "roz"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz3"], preturi[5], 70, 100, 5, "roz", "roz1"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz2"], preturi[6], 70, 100, 6, "roz"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz1"], preturi[7], 80, 100, 7, "roz"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz2"], preturi[6], 70, 100, 6, "roz", "roz2"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["roz1"], preturi[7], 80, 100, 7, "roz", "roz3"));
         #endregion
         props.Add(nein);
         #region PORTOCALIU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu3"], preturi[8], 90, 100, 8, "portocaliu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu3"], preturi[8], 90, 100, 8, "portocaliu", "portocaliu1"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu2"], preturi[9], 90, 100, 9, "portocaliu"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu1"], preturi[10], 100, 100, 10, "portocaliu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu2"], preturi[9], 90, 100, 9, "portocaliu", "portocaliu2"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["portocaliu1"], preturi[10], 100, 100, 10, "portocaliu", "portocaliu3"));
         #endregion
         props.Add(nein);
         #region ROSU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu3"], preturi[11], 110, 150, 11, "rosu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu3"], preturi[11], 110, 150, 11, "rosu", "rosu1"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu2"], preturi[12], 110, 150, 12, "rosu"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu1"], preturi[13], 120, 150, 13, "rosu"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu2"], preturi[12], 110, 150, 12, "rosu", "rosu2"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["rosu1"], preturi[13], 120, 150, 13, "rosu", "rosu3"));
         #endregion
         props.Add(nein);
         #region GALBEN
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben3"], preturi[14], 130, 150, 14, "galben"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben2"], preturi[15], 130, 150, 15, "galben"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben3"], preturi[14], 130, 150, 14, "galben", "galben1"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben2"], preturi[15], 130, 150, 15, "galben", "galben2"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben1"], preturi[16], 140, 150, 16, "galben"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["galben1"], preturi[16], 140, 150, 16, "galben", "galben3"));
         #endregion
         props.Add(nein);
         #region VERDE
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde3"], preturi[17], 150, 200, 17, "verde"));
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde2"], preturi[18], 150, 200, 18, "verde"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde3"], preturi[17], 150, 200, 17, "verde", "verde1"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde2"], preturi[18], 150, 200, 18, "verde", "verde2"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde1"], preturi[19], 160, 200, 19, "verde"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["verde1"], preturi[19], 160, 200, 19, "verde", "verde3"));
         #endregion
         props.Add(nein);
         props.Add(nein);
         #region ALBASTRU
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru2"], preturi[20], 175, 200, 20, "albastru"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru2"], preturi[20], 175, 200, 20, "albastru", "albastru1"));
         props.Add(nein);
-        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru1"], preturi[21], 200, 200, 21, "albastru"));
+        props.Add(new Proprietate(GetComponent<creare_tabla>().names["albastru1"], preturi[21], 200, 200, 21, "albastru", "albastru2"));
         #endregion
         int k = 0;
         for (int i = 0; i < 22;)
@@ -174,18 +194,20 @@ public class Base : MonoBehaviour
                 for (int j = 0; j < 6; j++)
                     props[k].chirie[j] = chirii[i * 6 + j];
                 i++;
+                props[k].chiried = props[k].chirie[0] * 2;
+                props[k].oldchir = props[k].chirie[0];
             }
             k++;
         }
         #region UTILITATI
-        util.Add(new Proprietate2(GetComponent<creare_tabla>().names["util1"], preturi[22], 75, 0));
-        util.Add(new Proprietate2(GetComponent<creare_tabla>().names["util2"], preturi[22], 75, 1));
+        util.Add(new Proprietate2(GetComponent<creare_tabla>().names["util1"], preturi[22], 75, 0, "util1"));
+        util.Add(new Proprietate2(GetComponent<creare_tabla>().names["util2"], preturi[22], 75, 1, "util2"));
         #endregion
         #region GARI
-        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara1"], preturi[23], 100, 0));
-        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara2"], preturi[23], 100, 1));
-        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara3"], preturi[23], 100, 2));
-        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara4"], preturi[23], 100, 3));
+        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara1"], preturi[23], 100, 0, "gara1"));
+        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara2"], preturi[23], 100, 1, "gara2"));
+        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara3"], preturi[23], 100, 2, "gara3"));
+        gari.Add(new Proprietate2(GetComponent<creare_tabla>().names["gara4"], preturi[23], 100, 3, "gara4"));
         #endregion
     }
 
@@ -387,116 +409,595 @@ public class Base : MonoBehaviour
             }
         #endregion
         #region INCHISOARE
+        pozPioni[40, 0] = new Vector3(-200.7f,1.75f,227.9f);
+        pozPioni[40, 1].x = pozPioni[40, 0].x + hProp / 5;
+        pozPioni[40, 1].y = 1.75f;
+        pozPioni[40, 1].z = pozPioni[40, 0].z;
+
+        pozPioni[40, 2].x = pozPioni[40, 0].x - hProp / 5;
+        pozPioni[40, 2].y = 1.75f;
+        pozPioni[40, 2].z = pozPioni[40, 0].z;
+
+        pozPioni[40, 3].x = pozPioni[40, 0].x;
+        pozPioni[40, 3].y = 1.75f;
+        pozPioni[40, 3].z = pozPioni[40, 0].z - hProp / 3;
+
+        pozPioni[40, 4].x = pozPioni[40, 3].x + hProp / 5;
+        pozPioni[40, 4].y = 1.75f;
+        pozPioni[40, 4].z = pozPioni[40, 3].z;
+
+        pozPioni[40, 5].x = pozPioni[40, 3].x - hProp / 5;
+        pozPioni[40, 5].y = 1.75f;
+        pozPioni[40, 5].z = pozPioni[40, 3].z;
         #endregion
+    }
+
+    void InitSanse()
+    {
+        for (int i = 0; i < 15; i++)
+            listaSansa.Add(i);
+        for (int i = 0; i < 14; i++)
+            listaCufar.Add(i);
+        amesteca(listaSansa);
+        amesteca(listaCufar);
+        initTxt();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && AruncaZar1.vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero)
+        if (endgame == false)
         {
-            if (players[laRand].inchisoare)
-                StartCoroutine(turaInchisoare());
-            else
-                StartCoroutine(tura());
+            if (Input.GetKey(KeyCode.Escape)) UImagic.showERR = 9;
+            // players[1].money = 1;
+
+            if (players[laRand].inchisoare && !turaPuscarie && !players[laRand].platit50)
+                buton50.SetActive(true);
+            if (Player.nrPlayers > 0 && players[laRand].pierdut == true) gataTura();
+            else if ((AruncaZar1.aruncat && AruncaZar2.aruncat) && AruncaZar1.vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero)
+            {
+                AruncaZar1.aruncat = false;
+                AruncaZar2.aruncat = false;
+                if (players[laRand].inchisoare)
+                {
+                    turaPuscarie = true;
+                    StartCoroutine(turaInchisoare());
+                }
+                else
+                    StartCoroutine(tura());
+            }
+        }
+        else
+        {
+            //
         }
     }
 
     IEnumerator tura()
     {
-        if (seJoaca)
-            yield break;
-
-        seJoaca = true;
-
-        //mutare
-        while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
-            yield return new WaitForSeconds(0.1f);
-        yield return new WaitForSeconds(0.5f);
-        if (AfisareZar.nrZar1 == AfisareZar.nrZar2)
-            nrduble++;
-        if (nrduble == 3)
-            yield return StartCoroutine(inchisoare(players[laRand]));
-        int aux = players[laRand].poz;
-        for (int i=0;i<AfisareZar.nrZar && !players[laRand].inchisoare;i++)
+        if (players[laRand].pierdut == true)
         {
-            nrPlayers[aux]--;
-            if ((aux + 1) % 10 == 0 && aux + 1 != 10)
-                players[laRand].pion.transform.rotation = Quaternion.Euler(-90, (aux + 1) % 40 / 10 * 90, 0);
-            else if (aux + 1 == 10)
-            {
-                if (nrPlayers[10] >= 3)
-                    players[laRand].pion.transform.rotation = Quaternion.Euler(-90, 90, 0);
-            }
-            else if (aux + 1 == 11)
-                players[laRand].pion.transform.rotation = Quaternion.Euler(-90, 90, 0);
-            yield return StartCoroutine(misca(players[laRand].pion,players[laRand].pion.transform.position, pozPioni[(aux + 1) % 40, nrPlayers[(aux + 1) % 40]]));
-            nrPlayers[(aux + 1) % 40]++;
-            aux = (aux + 1) % 40;
-            if (aux == 0)
-                banca.plata(players[laRand], 200);
-        }
-        players[laRand].poz = aux;
-        //chirie
-        if (aux == 0 || aux == 10 || aux == 20) //nimic
-            aux = aux;
-        else if (aux == 30) //inchisoare
-        {
-            yield return StartCoroutine(inchisoare(players[laRand]));
-        }
-        else if (aux % 10 == 5)
-        {
-            if (gari[aux/10].owner == banca)
-            {
-                //pot sa cumpar
-            }
-            else if (gari[aux/10].owner != players[laRand])
-            {
-                int nrgari = 0;
-                foreach (Proprietate2 g in gari)
-                    if (g.owner == gari[aux / 10].owner)
-                        nrgari++;
-                players[laRand].plata(gari[aux / 10].owner, 25 * (1 << (nrgari - 1)));
-            }
-        }
-        else if (aux == 12 || aux == 18)
-        {
-            if (util[aux/13].owner == banca)
-            {
-                //pot sa cumpar
-            }
-            else if (util[aux/13].owner != players[laRand])
-            {
-                while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
-                    yield return new WaitForSeconds(0.1f);
-                if (util[0].owner == util[1].owner)
-                    players[laRand].plata(util[aux / 13].owner, AfisareZar.nrZar * 10);
-                else
-                    players[laRand].plata(util[aux / 13].owner, AfisareZar.nrZar * 4);
-            }
+            //gataTura();
         }
         else
         {
-            if (props[aux].owner == banca)
+            if (terminaTura.interactable == false)
             {
-                //pot sa cumpar
+                if (seJoaca)
+                    yield break;
+
+                seJoaca = true;
+
+                //mutare
+                if (!dinInchisoare)
+                {
+                    while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
+                        yield return new WaitForSeconds(0.1f);
+                }
+                yield return new WaitForSeconds(0.5f);
+                if (AfisareZar.nrZar1 == AfisareZar.nrZar2)
+                    nrduble++;
+                if (nrduble == 3)
+                    yield return StartCoroutine(inchisoare(players[laRand]));
+                int aux = players[laRand].poz;
+                for (int i = 0; i < AfisareZar.nrZar && !players[laRand].inchisoare; i++)
+                {
+                    nrPlayers[aux]--;
+                    if (aux == 40)
+                        aux = 10;
+                    if ((aux + 1) % 10 == 0 && aux + 1 != 10)
+                        players[laRand].pion.transform.rotation = Quaternion.Euler(-90, (aux + 1) % 40 / 10 * 90, 0);
+                    else if (aux + 1 == 10)
+                    {
+                        if (nrPlayers[10] >= 3)
+                            players[laRand].pion.transform.rotation = Quaternion.Euler(-90, 90, 0);
+                    }
+                    else if (aux + 1 == 11)
+                        players[laRand].pion.transform.rotation = Quaternion.Euler(-90, 90, 0);
+                    yield return StartCoroutine(misca(players[laRand].pion, players[laRand].pion.transform.position, pozPioni[(aux + 1) % 40, nrPlayers[(aux + 1) % 40]]));
+                    nrPlayers[(aux + 1) % 40]++;
+                    aux = (aux + 1) % 40;
+                    if (aux == 0)
+                        banca.plata(players[laRand], 200);
+                }
+                players[laRand].poz = aux;
+                //chirie
+                if (aux == 0 || aux == 10 || aux == 20) //nimic
+                    aux = aux;
+                else if (aux == 30) //inchisoare
+                {
+                    yield return StartCoroutine(inchisoare(players[laRand]));
+                }
+                else if (aux % 10 == 5)
+                {
+                    if (gari[aux / 10].ownedByBank == true)
+                    {
+                        setPreviewProp.crtID = gari[aux / 10].SID;
+                        crtP = aux / 10;
+                        crtTip = "gara";
+                        inBuyScreen = true;
+                    }
+                    else if (gari[aux / 10].owner.id != players[laRand].id && gari[aux / 10].ipotecat == false)
+                    {
+                        int nrgari = 0;
+                        foreach (Proprietate2 g in gari)
+                            if (g.owner.id == gari[aux / 10].owner.id && gari[aux / 10].ipotecat == false)
+                                nrgari++;
+                        players[laRand].plata(gari[aux / 10].owner, 25 * (1 << (nrgari - 1)));
+                    }
+                }
+                else if (aux == 12 || aux == 28)
+                {
+                    if (util[aux / 27].ownedByBank == true)
+                    {
+                        setPreviewProp.crtID = util[aux / 27].SID;
+                        crtP = aux / 27;
+                        crtTip = "util";
+                        inBuyScreen = true;
+                    }
+                    else if (util[aux / 27].owner.id != players[laRand].id && util[aux / 27].ipotecat == false)
+                    {
+                        while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
+                            yield return new WaitForSeconds(0.1f);
+                        if (util[0].owner == util[1].owner && util[0].ipotecat == false && util[1].ipotecat == false)
+                            players[laRand].plata(util[aux / 27].owner, AfisareZar.nrZar * 10);
+                        else
+                            players[laRand].plata(util[aux / 27].owner, AfisareZar.nrZar * 4);
+                    }
+                }
+                else if (notsansa(aux) == true && notTaxa(aux) == true)
+                {
+                    if (props[aux].ownedByBank == true)
+                    {
+                        setPreviewProp.crtID = props[aux].SID;
+                        crtP = aux;
+                        crtTip = "prop";
+                        Debug.Log(props[aux].SID);
+                        inBuyScreen = true;
+                    }
+                    else if (props[aux].owner.id != players[laRand].id && props[aux].ipotecat == false)
+                        players[laRand].plata(props[aux].owner, props[aux].chirie[props[aux].numarCase]);
+                }
+                else
+                {
+                    if (notTaxa(aux) == true)
+                    {
+                        Debug.Log("Vlad nu stie unity");
+                        if (aux == 7 || aux == 22 || aux == 36)
+                            yield return StartCoroutine(sansa(players[laRand]));
+                        else
+                            yield return StartCoroutine(cufar(players[laRand]));
+                    }
+                    else
+                    {
+                        if (aux == 4) players[laRand].plata(banca, 200);
+                        else players[laRand].plata(banca, 100);
+                    }
+                }
+                //trade/end turn
+                if (nrduble == pre || players[laRand].inchisoare)
+                {
+                    //laRand = (laRand + 1) % Player.nrPlayers;
+                    terminaTura.interactable = true;
+                    daCuZaru.interactable = false;
+                    nrduble = pre = 0;
+                }
+                pre = nrduble;
+                seJoaca = false;
             }
-            else if (props[aux].owner != players[laRand])
+        }
+    }
+
+    void amesteca(List<int> l)
+    {
+        int n = l.Count;
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            int k = Random.Range(0, i);
+            int aux = l[i];
+            l[i] = l[k];
+            l[k] = aux;
+        }
+    }
+
+    public IEnumerator sansa(Player p)
+    {
+        int i;
+        int nr, aux;
+
+        nr = listaSansa[pozSansa];
+        pozSansa = (pozSansa + 1) % 15;
+        setPreviewProp.crtID = nr.ToString();
+        while (previewProp.activeSelf == true)
+            yield return new WaitForSeconds(0.1f);
+        switch (nr)
+        {
+            case 0: p.plata(banca, 15); break; //-15
+            case 1: //mergi cea mai apropiata gara + chirie dubla
+                for (i = p.poz + 1; i % 10 != 5; i++) ;
+                i %= 40;
+                if (i < p.poz)
+                    banca.plata(p, 200);
+                deplasare(p, i);
+
+                break;
+            case 2: //inchisoare
+                yield return StartCoroutine(inchisoare(p));
+                break;
+            case 3: //mergi prima gara
+                if (5 < p.poz)
+                    banca.plata(p, 200);
+                deplasare(p, 5);
+                break;
+            case 4: //mergi a 3 rosie
+                if (23 < p.poz)
+                    banca.plata(p, 200);
+                deplasare(p, 24);
+                break;
+            case 5: //mergi 3 inapoi
+                deplasare(p, p.poz - 3);
+                break;
+            case 6: //+150
+                banca.plata(p, 150);
+                break;
+            case 7: //reparatii 25/100
+                int suma = 0;
+                foreach (Proprietate x in props)
+                {
+                    if (x.owner.id == p.id)
+                    {
+                        if (x.numarCase == 5)
+                            suma += 100;
+                        else suma += x.numarCase * 25;
+                    }
+                }
+                p.plata(banca, suma);
+                break;
+            case 8: //+50
+                banca.plata(p, 50);
+                break;
+            case 9: //platesti 50 la fiecare player
+                foreach (Player x in players)
+                    if (x.id != p.id)
+                        p.plata(x, 50);
+                break;
+            case 10: //mergi start
+                banca.plata(p, 200);
+                deplasare(p, 0);
+                break;
+            case 11: //mergi la a 2 albastru inchis
+                deplasare(p, 39);
+                break;
+            case 12: //mergi cea mai apropiata gara + chirie dubla
+                for (i = p.poz + 1; i % 10 != 5; i++) ;
+                i %= 40;
+                if (i < p.poz)
+                    banca.plata(p, 200);
+                deplasare(p, i);
+                break;
+            case 13: //mergi cea mai apropiata utilitate, dai cu 1 zar, platesti 10x
+                if (p.poz > 12 && p.poz < 28)
+                    i = 28;
+                else i = 12;
+                if (i < p.poz)
+                    banca.plata(p, 200);
+                deplasare(p, i);
+                break;
+            case 14: //mergi la prima roz
+                if (11 < p.poz)
+                    banca.plata(p, 200);
+                deplasare(p, 11);
+                break;
+        }
+        aux = p.poz;
+        if (aux == 0 || aux == 10 || aux == 20) //nimic
+            aux = aux;
+        else if (aux % 10 == 5)
+        {
+            if (gari[aux / 10].ownedByBank == true)
+            {
+                setPreviewProp.crtID = gari[aux / 10].SID;
+                crtP = aux / 10;
+                crtTip = "gara";
+                inBuyScreen = true;
+            }
+            else if (gari[aux / 10].owner.id != players[laRand].id && gari[aux / 10].ipotecat == false)
+            {
+                int nrgari = 0;
+                foreach (Proprietate2 g in gari)
+                    if (g.owner.id == gari[aux / 10].owner.id && gari[aux / 10].ipotecat == false)
+                        nrgari++;
+                players[laRand].plata(gari[aux / 10].owner, 25 * (1 << (nrgari)));
+            }
+        }
+        else if (aux == 12 || aux == 28)
+        {
+            if (util[aux / 27].ownedByBank == true)
+            {
+                setPreviewProp.crtID = util[aux / 27].SID;
+                crtP = aux / 27;
+                crtTip = "util";
+                inBuyScreen = true;
+            }
+            else if (util[aux / 27].owner.id != players[laRand].id && util[aux / 27].ipotecat == false)
+            {
+                while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
+                    yield return new WaitForSeconds(0.1f);
+                if (util[0].owner == util[1].owner && util[0].ipotecat == false && util[1].ipotecat == false)
+                    players[laRand].plata(util[aux / 27].owner, AfisareZar.nrZar * 10);
+                else
+                    players[laRand].plata(util[aux / 27].owner, AfisareZar.nrZar * 4);
+            }
+        }
+        else if (notsansa(aux) == true && notTaxa(aux) == true)
+        {
+            if (props[aux].ownedByBank == true)
+            {
+                setPreviewProp.crtID = props[aux].SID;
+                crtP = aux;
+                crtTip = "prop";
+                Debug.Log(props[aux].SID);
+                inBuyScreen = true;
+            }
+            else if (props[aux].owner.id != players[laRand].id && props[aux].ipotecat == false)
                 players[laRand].plata(props[aux].owner, props[aux].chirie[props[aux].numarCase]);
         }
-        //trade/end turn
-        if (nrduble == pre)
+    }
+
+    public IEnumerator cufar(Player p)
+    {
+        int nr;
+
+        nr = listaCufar[pozCufar];
+        pozCufar = (pozCufar + 1) % 14;
+        setPreviewProp.crtID = (15 + nr).ToString();
+        yield return new WaitForSeconds(0.01f);
+        switch (nr)
         {
-            laRand = (laRand + 1) % Player.nrPlayers;
-            nrduble = pre = 0;
+            case 0: //+25
+                banca.plata(p, 25);
+                break;
+            case 1: //reparatii 40/115
+                int suma = 0;
+                foreach (Proprietate x in props)
+                {
+                    if (x.owner.id == p.id)
+                    {
+                        if (x.numarCase == 5)
+                            suma += 100;
+                        else suma += x.numarCase * 25;
+                    }
+                }
+                p.plata(banca, suma);
+                break;
+            case 2: //primesti 10 de la fiecare player
+                foreach (Player x in players)
+                    if (x.id != p.id)
+                        x.plata(p, 10);
+                break;
+            case 3: //inchisoare
+                yield return StartCoroutine(inchisoare(p));
+                break;
+            case 4: //+100
+                banca.plata(p, 100);
+                break;
+            case 5: //-50
+                p.plata(banca, 50);
+                break;
+            case 6: //-50
+                p.plata(banca, 50);
+                break;
+            case 7: //+20
+                banca.plata(p, 20);
+                break;
+            case 8: //+50
+                banca.plata(p, 50);
+                break;
+            case 9: //-100
+                p.plata(banca, 100);
+                break;
+            case 10: //+10
+                banca.plata(p, 10);
+                break;
+            case 11: //+100
+                banca.plata(p, 100);
+                break;
+            case 12: //+100
+                banca.plata(p, 100);
+                break;
+            case 13: //mergi start
+                banca.plata(p, 200);
+                deplasare(p, 0);
+                break;
         }
-        pre = nrduble;
-        seJoaca = false;
+    }
+
+    void deplasare(Player p, int i)
+    {
+        nrPlayers[p.poz]--;
+        StartCoroutine(misca(p.pion, p.pion.transform.position, pozPioni[i, nrPlayers[i]]));
+        p.pion.transform.rotation = Quaternion.Euler(-90, i / 10 * 90, 0);
+        nrPlayers[i]++;
+        p.poz = i;
+    }
+
+    void initTxt()
+    {
+        //sanse
+        scTxt.Add("Ai depasit limita de viteza. Plateste o amenda de 15 lei.");
+        scTxt.Add("Mergi la cea mai apropiata gara.\n\nDaca nu este detinuta de un jucator o poti cumpara de la banca.\n\nDaca un jucator o detine plateste chirie dubla");
+        scTxt.Add("Ai fost prins facand evaziune fiscala. Mergi la inchisoare.");
+        scTxt.Add("Mergi la " + GetComponent<creare_tabla>().names["gara1"]);
+        scTxt.Add("Mergi la " + GetComponent<creare_tabla>().names["rosu1"]);
+        scTxt.Add("Ai alunecat pe o coaja de banana. Mergi 3 pozitii inapoi");
+        scTxt.Add("Ai castigat la loto. Colecteaza 150 de lei.");
+        scTxt.Add("A venit controlul ISU. Plateste 25 de lei pentru fiecare casa construita si 100 de lei pentru fiecare hotel");
+        scTxt.Add("Ai gasit niste bani pe strada. Colecteaza 50 de lei");
+        scTxt.Add("Ai pierdut un pariu. Plateste 50 de lei fiecarui jucator");
+        scTxt.Add("Mergi la Start");
+        scTxt.Add("Mergi la " + GetComponent<creare_tabla>().names["albastru1"]);
+        scTxt.Add("Mergi la cea mai apropiata gara.\n\nDaca nu este detinuta de un jucator o poti cumpara de la banca.\n\nDaca un jucator o detine plateste chirie dubla");
+        scTxt.Add("Mergi la cea mai apropiata utilitate.");
+        scTxt.Add("Mergi la " + GetComponent<creare_tabla>().names["roz3"]);
+
+        //cufere
+        scTxt.Add("Ai castigat un concurs de frumusete. Colecteaza 25 de lei.");
+        scTxt.Add("A venit controlul ISU. Plateste 40 de lei pentru fiecare casa construita si 115 de lei pentru fiecare hotel.");
+        scTxt.Add("Este ziua ta. Coleacteaza 10 lei de la fiecare jucator.");
+        scTxt.Add("Ai fost prins facand evaziune fiscala. Mergi la inchisoare.");
+        scTxt.Add("Ai primit un bonus la salariu. Colecteaza 100 de lei.");
+        scTxt.Add("Ai pierdut 50 de lei. Ce pacat.");
+        scTxt.Add("Ai circulat cu autobuzul fara bilet. Plateste o amenda de 50 de lei.");
+        scTxt.Add("Ai castigat o tombola. Colecteaza 20 de lei.");
+        scTxt.Add("Ai primit cadou de craciun. Colecteaza 50 de lei.");
+        scTxt.Add("Ti-ai pierdut portofelul. Pierzi 100 de lei.");
+        scTxt.Add("Ai castigat la carti. Colecteaza 10 lei.");
+        scTxt.Add("Ai primit premiul pentru antreprenorul lunii. Colecteaza 100 de lei.");
+        scTxt.Add("Ai primit o donatie din partea unei fundatii. Colecteaza 100 de lei.");
+        scTxt.Add("Mergi la Start");
+    }
+
+    bool notsansa(int x)
+    {
+        return !(x == 2 || x == 7 || x == 17 || x == 22 || x == 33 || x == 36);
+    }
+
+    bool notTaxa(int x)
+    {
+        return !(x == 4 || x == 38);
+    }
+
+    public void gataTura()
+    {
+        if (nextelig())
+        {
+            terminaTura.interactable = false;
+            daCuZaru.interactable = true;
+            laRand = (laRand + 1) % Player.nrPlayers;
+            UImagic.upList = true;
+            int nr = 0;
+            string nume = null;
+            foreach (Player p in players)
+            {
+                if (p.pierdut == false)
+                {
+                    nr++;
+                    nume = p.nume;
+                }
+            }
+            if (nr == 1)
+            {
+                UImagic.winnerplayer = nume;
+                UImagic.showERR = 8;
+                endgame = true;
+                fireworks.SetActive(true);
+                ExitGame.SetActive(true);
+		        daCuZaru.interactable = false;
+                terminaTura.interactable = false;
+            }
+            turaPuscarie = false;
+        }
+    }
+
+    bool nextelig()
+    {
+        if (players[laRand].money < 0 && players[laRand].pierdut == false)
+        {
+            if (sigurok == false)
+            {
+                UImagic.showERR = 2;
+                sigurok = true;
+                return false;
+            }
+            else
+            {
+                players[laRand].lost();
+                sigurok = false;
+                return true;
+            }
+        }
+        else return true;
+    }
+
+    public static void offBuyScreen()
+    {
+        inBuyScreen = false;
+        setPreviewProp.iesi = true;
+    }
+
+    public void urascUnity()
+    {
+        inBuyScreen = false;
     }
 
     IEnumerator turaInchisoare()
     {
-        yield return new WaitForSeconds(0.01f);
+        while ((AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero) && !players[laRand].platit50)
+        {
+            buton50.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+        }
+        if (players[laRand].platit50)
+        {
+            players[laRand].inchisoare = false;
+            yield return StartCoroutine(tura());
+        }
+        else
+        {
+            if (AfisareZar.nrZar1 == AfisareZar.nrZar2)
+            {
+                dinInchisoare = true;
+                players[laRand].inchisoare = false;
+                yield return StartCoroutine(tura());
+                dinInchisoare = false;
+            }
+            else
+            {
+                players[laRand].dubleInchisoare++;
+                if (players[laRand].dubleInchisoare == 3)
+                {
+                    dinInchisoare = true;
+                    players[laRand].inchisoare = false;
+                    plata50();
+                    yield return StartCoroutine(tura());
+                    dinInchisoare = false;
+                }
+                else
+                {
+                    daCuZaru.interactable = false;
+                    terminaTura.interactable = true;
+
+                }
+            }
+        }
+    }
+
+    public void plata50()
+    {
+        players[laRand].plata(banca, 50);
+        players[laRand].platit50 = true;
+        buton50.SetActive(false);
     }
 
     public static IEnumerator misca(GameObject pion, Vector3 poz1, Vector3 poz2)
@@ -632,8 +1133,16 @@ public class Base : MonoBehaviour
     {
         p.inchisoare = true;
         nrPlayers[p.poz]--;
+        p.pion.transform.rotation = Quaternion.Euler(-90, 0, 0);
         yield return StartCoroutine(misca(p.pion, p.pion.transform.position, pozPioni[40, nrPlayers[40]]));
         nrPlayers[40]++;
         players[laRand].poz = 40;
+        p.dubleInchisoare = 0;
+        p.platit50 = false;
+    }
+
+    public void IESIDINJOC()
+    {
+        Application.Quit();
     }
 }
