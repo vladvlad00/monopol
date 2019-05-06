@@ -89,4 +89,9 @@ public class miscareCamera : MonoBehaviour
     {
         Origine = Base.players[Base.laRand].pion.transform.position;
     }
+    public void resetCam()
+    {
+        transform.position = new Vector3(52f, 440f, -518f);
+        transform.LookAt(Origine);
+    }
 }

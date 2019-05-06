@@ -6,9 +6,12 @@ ScriptsOnlyBuild:
     - AruncaZar2
     - Base
     - FataZar
+    - Monoconsole
     - Player
     - Proprietate
     - StartUI
+    - Trade
+    - Tradebutton
     - UIbutonclic
     - UImagic
     - UIplscor
@@ -17,15 +20,23 @@ ScriptsOnlyBuild:
     - onClickBuy
     - pionus
     - setPreviewProp
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.Dropdown
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.Outline
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
     com.unity.multiplayer-hlapi.Runtime.dll:
     - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
@@ -84,6 +95,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9398}
     - Class: 114
+      Script: {instanceID: 9402}
+    - Class: 114
       Script: {instanceID: 9404}
     - Class: 114
       Script: {instanceID: 9410}
@@ -92,9 +105,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9420}
     - Class: 114
+      Script: {instanceID: 9426}
+    - Class: 114
+      Script: {instanceID: 9430}
+    - Class: 114
+      Script: {instanceID: 9444}
+    - Class: 114
+      Script: {instanceID: 9446}
+    - Class: 114
       Script: {instanceID: 9454}
     - Class: 114
       Script: {instanceID: 9456}
+    - Class: 114
+      Script: {instanceID: 9458}
     - Class: 114
       Script: {instanceID: 9496}
     - Class: 114
@@ -118,15 +141,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10120}
     - Class: 114
-      Script: {instanceID: 10184}
+      Script: {instanceID: 10170}
     - Class: 114
-      Script: {instanceID: 10336}
+      Script: {instanceID: 10186}
     - Class: 114
-      Script: {instanceID: 10404}
+      Script: {instanceID: 10338}
     - Class: 114
-      Script: {instanceID: 10422}
+      Script: {instanceID: 10410}
     - Class: 114
-      Script: {instanceID: 10910}
+      Script: {instanceID: 10428}
+    - Class: 114
+      Script: {instanceID: 10702}
+    - Class: 114
+      Script: {instanceID: 10754}
+    - Class: 114
+      Script: {instanceID: 10920}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -762,13 +791,13 @@ ScriptsOnlyBuild:
     className: setPreviewProp
   - hash:
       serializedVersion: 2
-      Hash: d3b914735e27f871200189e03ad5e2b1
+      Hash: 3ffb78513114f086d2f12046743403e6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
   - hash:
       serializedVersion: 2
-      Hash: 2c1888f30dd49a87c77bafa5e2ff7621
+      Hash: 97f878f8fdd8743cff3afa0f867cc7f7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Base
@@ -810,7 +839,13 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 73346ac74d327c6d403e733876b6a4b7
+      Hash: 2d9cc404dc75070afe182282263c8ca6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Tradebutton
+  - hash:
+      serializedVersion: 2
+      Hash: f6afb42c8f89709f019e3a9c5e376e4d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: pionus
@@ -858,10 +893,16 @@ ScriptsOnlyBuild:
     className: NetworkMigrationManager
   - hash:
       serializedVersion: 2
-      Hash: b8cd7d347be58de6bec0a4c6c94ed72f
+      Hash: 0600f1f348722d2b30381b3b42ba8751
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Proprietate
+  - hash:
+      serializedVersion: 2
+      Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
+    assemblyName: UnityEngine.TestRunner.dll
+    namespaceName: UnityEngine.TestTools
+    className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
       Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
@@ -942,6 +983,12 @@ ScriptsOnlyBuild:
     className: rotate
   - hash:
       serializedVersion: 2
+      Hash: c4763bb841d8ad96aead4b7fc22c937d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Monoconsole
+  - hash:
+      serializedVersion: 2
       Hash: 1dcb82730d983b77cec736c6ef19f814
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
@@ -964,6 +1011,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: b7c724ca7c1813f46e13b87a433af1c7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Trade
   - hash:
       serializedVersion: 2
       Hash: e6ae40841db498b6e673877ac45ad208
@@ -1015,4 +1068,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/zaboz/Desktop/New folder (2)/monopoly zabo.exe
+  playerPath: G:/monopoly/joc full/monopoly zabo.exe

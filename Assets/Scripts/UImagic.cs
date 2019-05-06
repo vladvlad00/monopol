@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UImagic : MonoBehaviour
 {
     public Button[] scor = new Button[6];
-    public GameObject[] ERRLIST = new GameObject[10];
+    public GameObject[] ERRLIST = new GameObject[12];
     public static bool schimbat = false;
     public static bool upList = false;
     public static int showERR = 0;

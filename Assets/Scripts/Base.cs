@@ -54,6 +54,17 @@ public class Base : MonoBehaviour
     public static Proprietate nein = new Proprietate("nu", -1, -1, -1, -1, null, null);//adaug null pe pozitiile unde nu am proprietati
     public static Proprietate2 nein2 = new Proprietate2("nu", -1, -1, -1, null);
 
+    public GameObject tradePropsST1;
+    public GameObject tradePropsDR1;
+    public GameObject tradePropsST2;
+    public GameObject tradePropsDR2;
+    public GameObject tradeST;
+    public GameObject tradeDR;
+    public GameObject ddST;
+    public GameObject ddDR;
+    public GameObject baniST;
+    public GameObject baniDR;
+
     public static int[] chirii =
     {
                          2,10,30,90,160,250, //maro
@@ -221,8 +232,8 @@ public class Base : MonoBehaviour
         string nume = textNume.text;
         peon = Instantiate(modele[pionus.i], pozPioni[0, nrPlayers[0]], Quaternion.Euler(270f, 0f, 0f)) as GameObject;
         peon.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        peon.AddComponent<Rigidbody>();
-        peon.AddComponent<BoxCollider>();
+        //peon.AddComponent<Rigidbody>();
+        //peon.AddComponent<BoxCollider>();
         players.Add(new Player(nume,peon));
     }
 
@@ -523,7 +534,9 @@ public class Base : MonoBehaviour
             if (Player.nrPlayers > 0 && players[laRand].pierdut == true) gataTura();
             if (Player.nrPlayers > 0 && players[laRand].inchisoare && !turaPuscarie && !players[laRand].platit50)
                 buton50.SetActive(true);
-            else if ((AruncaZar1.aruncat && AruncaZar2.aruncat) && AruncaZar1.vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero)
+            else if (Player.nrPlayers > 0 && !players[laRand].inchisoare && !turaPuscarie && !players[laRand].platit50)
+                buton50.SetActive(false);
+            if ((AruncaZar1.aruncat && AruncaZar2.aruncat) && AruncaZar1.vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero)
             {
                 AruncaZar1.aruncat = false;
                 AruncaZar2.aruncat = false;
@@ -562,12 +575,17 @@ public class Base : MonoBehaviour
                 {
                     while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
                         yield return new WaitForSeconds(0.1f);
+                    Time.timeScale = 1f;
                 }
                 yield return new WaitForSeconds(0.5f);
                 if (AfisareZar.nrZar1 == AfisareZar.nrZar2)
+                {
                     nrduble++;
+                }
                 if (nrduble == 3)
                     yield return StartCoroutine(inchisoare(players[laRand]));
+                if (players[laRand].poz > 25)
+                    StartCoroutine(inchisoare(players[laRand]));
                 int aux = players[laRand].poz;
                 for (int i = 0; i < AfisareZar.nrZar && !players[laRand].inchisoare; i++)
                 {
@@ -591,7 +609,7 @@ public class Base : MonoBehaviour
                 }
                 players[laRand].poz = aux;
                 //chirie
-                if (aux == 0 || aux == 10 || aux == 20) //nimic
+                if (aux == 0 || aux == 10 || aux == 20 || aux == 40) //nimic
                     aux = aux;
                 else if (aux == 30) //inchisoare
                 {
@@ -628,6 +646,7 @@ public class Base : MonoBehaviour
                     {
                         while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
                             yield return new WaitForSeconds(0.1f);
+                        Time.timeScale = 1f;
                         if (util[0].owner == util[1].owner && util[0].ipotecat == false && util[1].ipotecat == false)
                             players[laRand].plata(util[aux / 27].owner, AfisareZar.nrZar * 10);
                         else
@@ -698,6 +717,7 @@ public class Base : MonoBehaviour
         nr = listaSansa[pozSansa];
         pozSansa = (pozSansa + 1) % 15;
         setPreviewProp.crtID = nr.ToString();
+        yield return new WaitForSeconds(2f);
         while (previewProp.activeSelf == true)
             yield return new WaitForSeconds(0.1f);
         switch (nr)
@@ -780,7 +800,7 @@ public class Base : MonoBehaviour
                 break;
         }
         aux = p.poz;
-        if (aux == 0 || aux == 10 || aux == 20) //nimic
+        if (aux == 0 || aux == 10 || aux == 20 || aux == 40) //nimic
             aux = aux;
         else if (aux % 10 == 5)
         {
@@ -813,6 +833,7 @@ public class Base : MonoBehaviour
             {
                 while (AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero)
                     yield return new WaitForSeconds(0.1f);
+                Time.timeScale = 1f;
                 if (util[0].owner == util[1].owner && util[0].ipotecat == false && util[1].ipotecat == false)
                     players[laRand].plata(util[aux / 27].owner, AfisareZar.nrZar * 10);
                 else
@@ -831,6 +852,22 @@ public class Base : MonoBehaviour
             }
             else if (props[aux].owner.id != players[laRand].id && props[aux].ipotecat == false)
                 players[laRand].plata(props[aux].owner, props[aux].chirie[props[aux].numarCase]);
+        }
+        else
+        {
+            if (notTaxa(aux) == true)
+            {
+                Debug.Log("Vlad nu stie unity");
+                if (aux == 7 || aux == 22 || aux == 36)
+                    yield return StartCoroutine(sansa(players[laRand]));
+                else
+                    yield return StartCoroutine(cufar(players[laRand]));
+            }
+            else
+            {
+                if (aux == 4) players[laRand].plata(banca, 200);
+                else players[laRand].plata(banca, 100);
+            }
         }
     }
 
@@ -1027,6 +1064,7 @@ public class Base : MonoBehaviour
             buton50.SetActive(false);
             yield return new WaitForSeconds(0.1f);
         }
+        Time.timeScale = 1f;
         if (players[laRand].platit50)
         {
             players[laRand].inchisoare = false;
@@ -1078,14 +1116,16 @@ public class Base : MonoBehaviour
         Vector3 newPos = new Vector3();
 
         seMisca = true;
-        pion.GetComponent<Rigidbody>().useGravity = false;
+        //pion.GetComponent<Rigidbody>().useGravity = false;
         if (Mathf.Abs(poz1.x - poz2.x) < 0.01f)
         {
             float xcentru = (poz1.x + poz2.x) / 2, zcentru = (poz1.z + poz2.z) / 2;
             if (poz1.z < poz2.z)
             {
                 r = (poz2.z - poz1.z) / 2;
-                pas = r / 20f;
+                if (r < 5 * lProp)
+                    pas = r / 20f;
+                else pas = r / 40f;
                 for (z = poz1.z; z <= poz2.z; z += pas)
                 {
                     yield return new WaitForSeconds(0.01f);
@@ -1101,7 +1141,9 @@ public class Base : MonoBehaviour
             else
             {
                 r = (poz1.z - poz2.z) / 2;
-                pas = r / 20f;
+                if (r < 5 * lProp)
+                    pas = r / 20f;
+                else pas = r / 40f;
                 for (z = poz1.z; z >= poz2.z; z -= pas)
                 {
                     yield return new WaitForSeconds(0.01f);
@@ -1121,7 +1163,9 @@ public class Base : MonoBehaviour
             if (poz1.x < poz2.x)
             {
                 r = (poz2.x - poz1.x) / 2;
-                pas = r / 20f;
+                if (r < 5 * lProp)
+                    pas = r / 20f;
+                else pas = r / 40f;
                 for (x = poz1.x; x <= poz2.x; x += pas)
                 {
                     yield return new WaitForSeconds(0.01f);
@@ -1137,7 +1181,9 @@ public class Base : MonoBehaviour
             else
             {
                 r = (poz1.x - poz2.x) / 2;
-                pas = r / 20f;
+                if (r < 5 * lProp)
+                    pas = r / 20f;
+                else pas = r / 40f;
                 for (x = poz1.x; x >= poz2.x; x -= pas)
                 {
                     yield return new WaitForSeconds(0.01f);
@@ -1164,7 +1210,9 @@ public class Base : MonoBehaviour
             float xcentru = (poz1.x + poz2.x) / 2, zcentru = (poz1.z + poz2.z) / 2;
             if (poz1.x < poz2.x)
             {
-                pas = (poz2.x-poz1.x)/ 40f;
+                if (poz2.x-poz1.x < 5*lProp)
+                    pas = (poz2.x - poz1.x) / 40f;
+                else pas = (poz2.x - poz1.x) / 80f;
                 for (x = poz1.x; x <= poz2.x; x += pas)
                 {
                     newPos.x = x;
@@ -1179,7 +1227,9 @@ public class Base : MonoBehaviour
             }
             else
             {
-                pas = (poz1.x - poz2.x) / 40f;
+                if (poz1.x - poz2.x < 5 * lProp)
+                    pas = (poz1.x - poz2.x) / 40f;
+                else pas = (poz1.x - poz2.x) / 80f;
                 for (x = poz1.x; x >= poz2.x; x -= pas)
                 {
                     newPos.x = x;
@@ -1194,7 +1244,7 @@ public class Base : MonoBehaviour
             }
         }
         pion.transform.position = poz2;
-        pion.GetComponent<Rigidbody>().useGravity = true;
+        //pion.GetComponent<Rigidbody>().useGravity = true;
         seMisca = false;
     }
 
@@ -1208,6 +1258,48 @@ public class Base : MonoBehaviour
         players[laRand].poz = 40;
         p.dubleInchisoare = 0;
         p.platit50 = false;
+    }
+
+    public void curataTrade()
+    {
+        Transform[] g1 = tradePropsST1.GetComponentsInChildren<Transform>();
+        Transform[] g2 = tradePropsDR1.GetComponentsInChildren<Transform>();
+        Transform[] g3 = tradePropsST2.GetComponentsInChildren<Transform>();
+        Transform[] g4 = tradePropsDR2.GetComponentsInChildren<Transform>();
+        foreach (Transform g in g1)
+        {
+            if (g.GetComponent<Tradebutton>() != null) g.GetComponent<Tradebutton>().selectat = false;
+        }
+        foreach(Transform g in g2)
+        {
+            if (g.GetComponent<Tradebutton>() != null) g.GetComponent<Tradebutton>().selectat = false;
+        }
+        foreach (Transform g in g3)
+        {
+            if (g.GetComponent<Tradebutton>() != null) g.GetComponent<Tradebutton>().selectat = false;
+        }
+        foreach (Transform g in g4)
+        {
+            if (g.GetComponent<Tradebutton>() != null) g.GetComponent<Tradebutton>().selectat = false;
+        }
+
+        Image[] iT1 = tradeST.GetComponentsInChildren<Image>();
+        Image[] iT2 = tradeDR.GetComponentsInChildren<Image>();
+        foreach(Image i in iT1)
+        {
+            i.GetComponent<Outline>().enabled = false;
+            i.GetComponentInChildren<Text>().text = "";
+        }
+        foreach (Image i in iT2)
+        {
+            i.GetComponent<Outline>().enabled = false;
+            i.GetComponentInChildren<Text>().text = "";
+        }
+
+        ddST.GetComponent<Dropdown>().value = 0;
+        ddDR.GetComponent<Dropdown>().value = 0;
+        baniST.GetComponentInChildren<InputField>().text = "";
+        baniDR.GetComponentInChildren<InputField>().text = "";
     }
 
     public void IESIDINJOC()

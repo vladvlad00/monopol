@@ -619,6 +619,7 @@ public class setPreviewProp : MonoBehaviour
             #region sansa cufar
             else
             {
+                crtcrtID = 100000;
                 p.SetActive(false);
                 g.SetActive(false);
                 u.SetActive(false);
@@ -704,7 +705,7 @@ public class setPreviewProp : MonoBehaviour
                         }
                     }
                 }
-                else if (crtcrtID >= 1000)
+                else if (crtcrtID >= 1000 && crtcrtID <= 10000)
                 {
                     if (Base.util[crtcrtID % 1000].owner.id == Base.players[Base.laRand].id)
                     {

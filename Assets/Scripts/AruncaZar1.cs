@@ -48,6 +48,7 @@ public class AruncaZar1 : MonoBehaviour
     public void arunca()
     {
         //vitezaZar = rb.velocity;
+        Time.timeScale = 2f;
         if (vitezaZar == Vector3.zero && AruncaZar2.vitezaZar == Vector3.zero && Base.seJoaca == false)
         {
             AfisareZar.nrZar = AfisareZar.nrZar1 = 0;

@@ -11,6 +11,8 @@ public class pionus : MonoBehaviour
     public Text t; // text minim 2 playeri
     public Button s; // buton selectat pion
     public Text p; // text deja selectat
+    public Text p2; // deja nume
+    public Text p3; // nu gol
     public InputField nume; //numele scris
     GameObject dis;
     public static int i = 0;
@@ -19,7 +21,7 @@ public class pionus : MonoBehaviour
     int[] uz = new int[6];
     void Start()
     {
-        verif();
+        //s.interactable = (verif() && verif2() && verif3());
         transform.position = new Vector3(1000, 2500, 1000);
         dis = Instantiate(modele[i], transform.position, Quaternion.Euler(270f, 180f, 0f));
         for (int i = 0; i < 6; i++)
@@ -29,13 +31,10 @@ public class pionus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool ok = true;
-        foreach (Player p in Base.players)
-            if (p.nume == nume.text)
-                ok = false;
-        if (nume.text == "")
-            ok = false;
-        s.interactable = ok;
+        bool a1 = verif();
+        bool a2 = verif2();
+        bool a3 = verif3();
+        s.interactable = (a1 && a2 && a3);
     }
     //nu stiu sa folosesc statice
     void DrawText(Vector3 poz, string textul, int size, Color cl, float rotX, float rotY)
@@ -76,35 +75,69 @@ public class pionus : MonoBehaviour
         i--;
         if (i < 0) i = 5;
         reRender();
-        verif();
+        //s.interactable = (verif() && verif2() && verif3());
     }
     public void dr()
     {
         i++;
         if (i > 5) i = 0;
         reRender();
-        verif();
+        //s.interactable = (verif() && verif2() && verif3());
     }
 
-    void verif()
+    bool verif()
     {
         if(uz[i] == 1)
         {
-            s.interactable = false;
             p.enabled = true;
+            return false;
         }
         else
         {
-            s.interactable = true;
             p.enabled = false;
+            return true;
+        }
+    }
+    
+    bool verif2()
+    {
+        bool ok = true;
+        if (Player.nrPlayers > 0)
+        {
+            foreach (Player p in Base.players)
+                if (p.nume == nume.text)
+                    ok = false;
+        }
+        if(ok)
+        {
+            p2.enabled = false;
+            return true;
+        }
+        else
+        {
+            p2.enabled = true;
+            return false;
         }
     }
 
+    bool verif3()
+    {
+        if (nume.text == "")
+        {
+            p3.enabled = true;
+            return false;
+        }
+        else
+        {
+            p3.enabled = false;
+            return true;
+        }
+    }
     public void reseti()
     {
         i = 0;
         reRender();
-        verif();
+        //s.interactable = (verif() && verif2() && verif3());
     }
 
     public void previewp()

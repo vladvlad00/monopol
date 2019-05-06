@@ -8,7 +8,7 @@ public class Tradebutton : MonoBehaviour
     public GameObject dreptunghiuriSt;
     public GameObject dreptunghiuriDr;
     public bool stanga = true;
-    bool selectat = false;
+    public bool selectat = false;
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(licc);
@@ -401,6 +401,11 @@ public class Tradebutton : MonoBehaviour
                         if (Base.gari[k].owner.id == Trade.plST.id) i.enabled = true;
                         else i.enabled = false;
                     }
+                    if (i.name == "grafica")
+                    {
+                        if (selectat == true) i.color = new Color(155f / 255, 0f, 0f, 1f);
+                        else i.color = Color.white;
+                    }
                 }
             }
             else if (name == "util1" || name == "util2")
@@ -429,6 +434,11 @@ public class Tradebutton : MonoBehaviour
                     {
                         if (Base.util[k].owner.id == Trade.plST.id) i.enabled = true;
                         else i.enabled = false;
+                    }
+                    if (i.name == "grafica")
+                    {
+                        if (selectat == true) i.color = new Color(155f / 255, 0f, 0f, 1f);
+                        else i.color = Color.white;
                     }
                 }
             }
@@ -491,6 +501,11 @@ public class Tradebutton : MonoBehaviour
                         if (Base.gari[k].owner.id == Trade.plDR.id) i.enabled = true;
                         else i.enabled = false;
                     }
+                    if (i.name == "grafica")
+                    {
+                        if (selectat == true) i.color = new Color(155f / 255, 0f, 0f, 1f);
+                        else i.color = Color.white;
+                    }
                 }
             }
             else if (name == "util1" || name == "util2")
@@ -519,6 +534,11 @@ public class Tradebutton : MonoBehaviour
                     {
                         if (Base.util[k].owner.id == Trade.plDR.id) i.enabled = true;
                         else i.enabled = false;
+                    }
+                    if (i.name == "grafica")
+                    {
+                        if (selectat == true) i.color = new Color(155f / 255, 0f, 0f, 1f);
+                        else i.color = Color.white;
                     }
                 }
             }
