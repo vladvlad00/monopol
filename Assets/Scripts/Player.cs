@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         {
             if (p.owner.id == id) p.SetOwner(Base.banca);
         }
+        Trade.resetTheDD = true;
         Destroy(pion);
     }
 

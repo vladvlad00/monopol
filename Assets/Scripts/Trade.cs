@@ -37,6 +37,8 @@ public class Trade : MonoBehaviour
     public GameObject bDR;
     public GameObject tradeB;
 
+    public static bool resetTheDD = false;
+
     void Start()
     {
         GetComponent<Button>().onClick.AddListener(trade);
@@ -47,6 +49,22 @@ public class Trade : MonoBehaviour
         foreach(Player p in Base.players)
         {
             sOptions.Add(p.nume);
+        }
+        ddst.GetComponent<Dropdown>().AddOptions(sOptions);
+        dddr.GetComponent<Dropdown>().AddOptions(sOptions);
+        foreach (Player p in Base.players) if (p.nume == numeST) plST = p;
+        foreach (Player p in Base.players) if (p.nume == numeDR) plDR = p;
+    }
+
+    void resetDD()
+    {
+        ddst.GetComponent<Dropdown>().ClearOptions();
+        dddr.GetComponent<Dropdown>().ClearOptions();
+        List<string> sOptions = new List<string>();
+        sOptions.Add("");
+        foreach (Player p in Base.players)
+        {
+            if (p.pierdut == false) sOptions.Add(p.nume);
         }
         ddst.GetComponent<Dropdown>().AddOptions(sOptions);
         dddr.GetComponent<Dropdown>().AddOptions(sOptions);
@@ -102,6 +120,12 @@ public class Trade : MonoBehaviour
     }
     void Update()
     {
+        if(resetTheDD == true)
+        {
+            resetDD();
+            resetTheDD = false;
+        }
+
         if (ddst.GetComponent<Dropdown>().captionText.text == "" || dddr.GetComponent<Dropdown>().captionText.text == "")
         {
             alegeST.SetActive(false);

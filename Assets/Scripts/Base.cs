@@ -27,6 +27,7 @@ public class Base : MonoBehaviour
     GameObject peon;
     public GameObject[] modele = new GameObject[6];
     public static bool seJoaca = false;
+    public static bool seJoacaInchis = false;
     public static Vector3[,] pozPioni = new Vector3[41,6]; //poz 41 e pentru cand esti la inchisoare
     public static Vector3[,] pozCase = new Vector3[41, 5];
     public static int[] nrPlayers = new int[41];
@@ -584,8 +585,6 @@ public class Base : MonoBehaviour
                 }
                 if (nrduble == 3)
                     yield return StartCoroutine(inchisoare(players[laRand]));
-                if (players[laRand].poz > 25)
-                    StartCoroutine(inchisoare(players[laRand]));
                 int aux = players[laRand].poz;
                 for (int i = 0; i < AfisareZar.nrZar && !players[laRand].inchisoare; i++)
                 {
@@ -858,10 +857,7 @@ public class Base : MonoBehaviour
             if (notTaxa(aux) == true)
             {
                 Debug.Log("Vlad nu stie unity");
-                if (aux == 7 || aux == 22 || aux == 36)
-                    yield return StartCoroutine(sansa(players[laRand]));
-                else
-                    yield return StartCoroutine(cufar(players[laRand]));
+                //
             }
             else
             {
@@ -1059,12 +1055,18 @@ public class Base : MonoBehaviour
 
     IEnumerator turaInchisoare()
     {
+        if (seJoacaInchis)
+            yield break;
+
+        seJoacaInchis = true;
+
         while ((AfisareZar.nrZar == 0 || AruncaZar1.vitezaZar != Vector3.zero || AruncaZar2.vitezaZar != Vector3.zero) && !players[laRand].platit50)
         {
             buton50.SetActive(false);
             yield return new WaitForSeconds(0.1f);
         }
         Time.timeScale = 1f;
+        yield return new WaitForSeconds(0.5f);
         if (players[laRand].platit50)
         {
             players[laRand].inchisoare = false;
@@ -1098,6 +1100,7 @@ public class Base : MonoBehaviour
                 }
             }
         }
+        seJoacaInchis = false;
     }
 
     public void plata50()
