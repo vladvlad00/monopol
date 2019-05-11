@@ -68,15 +68,15 @@ public class Player : MonoBehaviour
         pierdut = true;
         foreach(Proprietate p in Base.props)
         {
-            if (p.owner.id == id) p.SetOwner(Base.banca);
+            if (p.owner.id == id) p.resetTheProp();
         }
         foreach(Proprietate2 p in Base.gari)
         {
-            if (p.owner.id == id) p.SetOwner(Base.banca);
+            if (p.owner.id == id) p.resetTheProp();
         }
         foreach(Proprietate2 p in Base.util)
         {
-            if (p.owner.id == id) p.SetOwner(Base.banca);
+            if (p.owner.id == id) p.resetTheProp();
         }
         Trade.resetTheDD = true;
         Destroy(pion);

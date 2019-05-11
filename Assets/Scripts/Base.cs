@@ -570,6 +570,7 @@ public class Base : MonoBehaviour
                     yield break;
 
                 seJoaca = true;
+                buton50.SetActive(false);
 
                 //mutare
                 if (!dinInchisoare)
@@ -857,7 +858,10 @@ public class Base : MonoBehaviour
             if (notTaxa(aux) == true)
             {
                 Debug.Log("Vlad nu stie unity");
-                //
+                if (aux == 7 || aux == 22 || aux == 36)
+                    Debug.Log("Zabo nu stie unity");
+                else
+                    yield return StartCoroutine(cufar(players[laRand]));
             }
             else
             {
@@ -1100,6 +1104,7 @@ public class Base : MonoBehaviour
                 }
             }
         }
+        buton50.SetActive(false);
         seJoacaInchis = false;
     }
 

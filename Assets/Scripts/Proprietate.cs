@@ -116,6 +116,23 @@ public class Proprietate : MonoBehaviour
         }
         else UImagic.showERR = 6; //macar 1 casa
     }
+
+    public void admDemolish()
+    {
+        if (numarCase == 5)
+        {
+            Destroy(casute[0]);
+            for (int i = 0; i < 4; i++)
+            {
+                casute[i] = Instantiate(modelCasa, Base.pozCase[id, i], Quaternion.Euler(-90, (id + 7) / 6 * 90, 0)) as GameObject;
+                casute[i].transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            }
+        }
+        else
+            Destroy(casute[numarCase - 1]);
+        numarCase--;
+        Updateprop();
+    }
     //Verifica daca poti construi casa
     bool CanBuild()
     {
@@ -154,6 +171,13 @@ public class Proprietate : MonoBehaviour
             owner.plata(Base.banca, ((pret / 2) * 11) / 10);
             ipotecat = false;
         }
+    }
+
+    public void resetTheProp()
+    {
+        owner = Base.banca;
+        while (numarCase > 0) admDemolish();
+        ipotecat = false;
     }
 
 }

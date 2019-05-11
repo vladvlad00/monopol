@@ -74,8 +74,8 @@ public class Trade : MonoBehaviour
 
     void trade()
     {
-        upST();
-        upDR();
+        //upST();
+        //upDR();
         if (numeST != null && numeDR != null && numeST != numeDR)
         {
             foreach (Player p in Base.players) if (p.nume == numeST) plST = p;
@@ -143,6 +143,34 @@ public class Trade : MonoBehaviour
             tradeB.GetComponent<Button>().interactable = true;
         }
     }
+
+    public void resetArrsST()
+    {
+        for (int i = 0; i <= nrpST; i++)
+            pST[i] = Base.nein;
+        for (int i = 0; i <= nrgST; i++)
+            gST[i] = Base.nein2;
+        for (int i = 0; i <= nruST; i++)
+            uST[i] = Base.nein2;
+        nrpST = 0;
+        nrgST = 0;
+        nruST = 0;
+        moneyST = 0;
+    }
+    public void resetArrsDR()
+    {
+        for (int i = 0; i <= nrpDR; i++)
+            pDR[i] = Base.nein;
+        for (int i = 0; i <= nrgDR; i++)
+            gDR[i] = Base.nein2;
+        for (int i = 0; i <= nruDR; i++)
+            uDR[i] = Base.nein2;
+        nrpDR = 0;
+        nrgDR = 0;
+        nruDR = 0;
+        moneyDR = 0;
+    }
+
     public void upST()
     {
         numeST = ddst.GetComponent<Dropdown>().captionText.text;
@@ -153,6 +181,7 @@ public class Trade : MonoBehaviour
             ddst.GetComponent<Dropdown>().value = 0;
             numeST = null;
         }
+        resetArrsST();
     }
 
     public void upDR()
@@ -165,6 +194,7 @@ public class Trade : MonoBehaviour
             dddr.GetComponent<Dropdown>().value = 0;
             numeDR = null;
         }
+        resetArrsDR();
     }
 
     public void iaBaniST()
@@ -172,7 +202,11 @@ public class Trade : MonoBehaviour
         char[] c = ifst.GetComponentInChildren<InputField>().text.ToCharArray();
         foreach(char cc in c)
         {
-            if (cc != '0' && cc != '1' && cc != '2' && cc != '3' && cc != '4' && cc != '5' && cc != '6' && cc != '7' && cc != '8' && cc != '9' && cc != '-') return;
+            if (cc != '0' && cc != '1' && cc != '2' && cc != '3' && cc != '4' && cc != '5' && cc != '6' && cc != '7' && cc != '8' && cc != '9' && cc != '-')
+            {
+                ifst.GetComponentInChildren<InputField>().text = moneyST.ToString();
+                return;
+            }
         }
         int aux = moneyST;
         moneyST = int.Parse(ifst.GetComponentInChildren<InputField>().text);
@@ -195,7 +229,11 @@ public class Trade : MonoBehaviour
         char[] c = ifdr.GetComponentInChildren<InputField>().text.ToCharArray();
         foreach (char cc in c)
         {
-            if (cc != '0' && cc != '1' && cc != '2' && cc != '3' && cc != '4' && cc != '5' && cc != '6' && cc != '7' && cc != '8' && cc != '9' && cc != '-') return;
+            if (cc != '0' && cc != '1' && cc != '2' && cc != '3' && cc != '4' && cc != '5' && cc != '6' && cc != '7' && cc != '8' && cc != '9' && cc != '-')
+            {
+                ifst.GetComponentInChildren<InputField>().text = moneyST.ToString();
+                return;
+            }
         }
         int aux = moneyDR;
         moneyDR = int.Parse(ifdr.GetComponentInChildren<InputField>().text);

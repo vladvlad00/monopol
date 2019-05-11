@@ -51,4 +51,10 @@ public class Proprietate2 : MonoBehaviour
         }
         return nr;
     }
+
+    public void resetTheProp()
+    {
+        owner = Base.banca;
+        ipotecat = false;
+    }
 }
