@@ -1,6 +1,6 @@
 # Monopoly  
 ![StartImage](https://github.com/vladvlad00/monopol/blob/master/Pictures/PlayScreen.png)
-This project is the implementation of the well-known [Monopoly](https://en.wikipedia.org/wiki/Monopoly_(game)) board game.  
+This project is an implementation of the well-known [Monopoly](https://en.wikipedia.org/wiki/Monopoly_(game)) board game.  
 ## How to play  
 Our game plays similarly to the original board game, having little to none differences.  
 At this moment it is only possible to play it locally, on one PC.  Up to 6 players may join one session, each with their own pawn and name.  
@@ -8,8 +8,16 @@ After each player has made their selection, the game will start. From this momen
 ## The User Interface
 The **UI** offers useful information about the game.  
 ![UIplayers](https://github.com/vladvlad00/monopol/blob/master/Pictures/UIplayers.png)  
+
+---
+
+
 This part of the UI will show whose turn it is, and also how much money every player has.  
 ![UIproperties](https://github.com/vladvlad00/monopol/blob/master/Pictures/PropSit.png)  
+
+---
+
+
 Here we can see specific information about each property, such as who owns it and what its current rent is.  
 ![Trade](https://github.com/vladvlad00/monopol/blob/master/Pictures/Trade.png)  
 The trading interface allows players to easily trade properties and money between eachother.  
