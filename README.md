@@ -4,7 +4,7 @@ This project is an implementation of the well-known [Monopoly](https://en.wikipe
 ## How to play  
 Our game plays similarly to the original board game, having little to none differences.  
 At this moment it is only possible to play it locally, on one PC.  Up to 6 players may join one session, each with their own pawn and name.  
-After each player has made their selection, the game will start. From this moment forward the rules are identical to the original game and the session will end when all palyers but one go bankrupt.  
+After each player has made their selection, the game will start. From this moment forward the rules are identical to the original game and the session will end when all players but one go bankrupt.  
 ## The User Interface
 The **UI** offers useful information about the game.  
   
