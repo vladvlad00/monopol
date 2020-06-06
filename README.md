@@ -8,13 +8,13 @@ After each player has made their selection, the game will start. From this momen
 ## The User Interface
 The **UI** offers useful information about the game.  
   
-### This part of the UI will show whose turn it is, and also how much money every player has.  
+#### This part of the UI will show whose turn it is, and also how much money every player has.  
 ![UIplayers](https://github.com/vladvlad00/monopol/blob/master/Pictures/UIplayers.png)  
 ---  
-### Here we can see specific information about each property, such as who owns it and what its current rent is.  
+#### Here we can see specific information about each property, such as who owns it and what its current rent is.  
 ![UIproperties](https://github.com/vladvlad00/monopol/blob/master/Pictures/PropSit.png)  
 --- 
-### The trading interface allows players to easily trade properties and money between eachother.  
+#### The trading interface allows players to easily trade properties and money between eachother.  
 ![Trade](https://github.com/vladvlad00/monopol/blob/master/Pictures/Trade.png)  
   
 ## Languages & Technologies
