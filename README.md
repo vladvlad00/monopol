@@ -8,14 +8,15 @@ After each player has made their selection, the game will start. From this momen
 ## The User Interface
 The **UI** offers useful information about the game.  
   
+* This part of the UI will show whose turn it is, and also how much money every player has.  
 ![UIplayers](https://github.com/vladvlad00/monopol/blob/master/Pictures/UIplayers.png)  
-* This part of the UI will show whose turn it is, and also how much money every player has.
 ---  
+* Here we can see specific information about each property, such as who owns it and what its current rent is.  
 ![UIproperties](https://github.com/vladvlad00/monopol/blob/master/Pictures/PropSit.png)  
-* Here we can see specific information about each property, such as who owns it and what its current rent is. 
 --- 
-![Trade](https://github.com/vladvlad00/monopol/blob/master/Pictures/Trade.png)  
 * The trading interface allows players to easily trade properties and money between eachother.  
+![Trade](https://github.com/vladvlad00/monopol/blob/master/Pictures/Trade.png)  
+  
 ## Languages & Technologies
 **Monopoly** was created using the [Unity 3D Engine](https://unity.com/).  
 **C#** is the main programming language used, comprising over 99% of the project.  
