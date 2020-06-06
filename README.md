@@ -7,20 +7,15 @@ At this moment it is only possible to play it locally, on one PC.  Up to 6 playe
 After each player has made their selection, the game will start. From this moment forward the rules are identical to the original game and the session will end when all but one player go bankrupt.  
 ## The User Interface
 The **UI** offers useful information about the game.  
+  
 ![UIplayers](https://github.com/vladvlad00/monopol/blob/master/Pictures/UIplayers.png)  
-
----
-
-
-This part of the UI will show whose turn it is, and also how much money every player has.  
+* This part of the UI will show whose turn it is, and also how much money every player has.
+---  
 ![UIproperties](https://github.com/vladvlad00/monopol/blob/master/Pictures/PropSit.png)  
-
----
-
-
-Here we can see specific information about each property, such as who owns it and what its current rent is.  
+* Here we can see specific information about each property, such as who owns it and what its current rent is. 
+--- 
 ![Trade](https://github.com/vladvlad00/monopol/blob/master/Pictures/Trade.png)  
-The trading interface allows players to easily trade properties and money between eachother.  
+* The trading interface allows players to easily trade properties and money between eachother.  
 ## Languages & Technologies
 **Monopoly** was created using the [Unity 3D Engine](https://unity.com/).  
 **C#** is the main programming language used, comprising over 99% of the project.  
